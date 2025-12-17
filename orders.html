@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Tables</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="" rel="icon">
+    <link href="" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <!-- <link href="assets/css/custom-style.css" rel="stylesheet"> -->
+    <link href="assets/css/custom-inputs.css" rel="stylesheet">
+
+    <script type="module" src="assets/js/behaviors/authGuard.js"></script>
+</head>
+
+<body>
+    <script src="/assets/js/layouts/layout_main.js"></script>
+
+    <header id="headerLayout">
+        <script>
+            loadLayout("headerLayout", "/assets/htmlLayouts/layout_header.html");
+        </script>
+    </header><!-- End Header -->
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebarLayout">
+        <script>
+            loadLayout("sidebarLayout", "/assets/htmlLayouts/layout_aside.html");
+        </script>
+    </aside><!-- End Sidebar-->
+
+    <main id="main">
+        <div class="pagetitle">
+            <h1>შეკვეთები</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">მთავარი</a></li>
+                    <li class="breadcrumb-item active">შეკვეთები</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <button type="button" class="btn btn-success w-100" id="add-button" title="შეკვეთის დამატება">
+            <i class="bi bi-plus-circle me-1"> </i> შეკვეთის დამატება
+        </button>
+
+        <div class="p-4">
+            <!-- შაბლონების ცხრილი -->
+            <!-- ძებნა ფილტრაციით -->
+            <div class="search-container">
+                <input type="text" id="searchInput" class="form-control" placeholder="მოძებნეთ შეკვეთა...">
+            </div>
+
+            <div class="card templates-table">
+                <div class="card-body p-0">
+                    <div>
+                        <table class="table table-striped table-hover mb-0" id="templatesTable">
+                            <thead>
+                                <tr>
+                                    <th name="order-id">შეკვეთის სახელი</th>
+                                    <th name="sum" class="text-end">ჯამი</th>
+                                    <th name="date" class="text-center">თარიღი</th>
+                                    <th name="hall" class="text-center">დარბაზი</th>
+                                    <th name="guest" class="text-center">სტუმარი</th>
+                                    <th name="customer" class="text-center">მომხმარებელი</th>
+                                    <th name="status" class="text-center">სტატუსი</th>
+                                    <th name="action" class="text-center">მოქმედებები</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main><!-- End #main -->
+    <!-- Viev Full Screen Modal მოდალის ფანჯარა-->
+    <div class="modal fade" id="view-fullscreenModal" tabindex="-1">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <script>
+                    loadLayout("view-fullscreenModal", "assets/htmlLayouts/layout-order-view-modal.html");
+                </script>
+            </div>
+        </div>
+    </div><!-- End Viev Full Screen Modal მოდალის ფანჯარა-->
+
+    <!-- Edit Full Screen Modal მოდალის ფანჯარა-->
+    <div class="modal fade" id="edit-fullscreenModal" tabindex="-1">
+        <script>
+            loadLayout("edit-fullscreenModal", "assets/htmlLayouts/layout-order-edit-modal.html");
+        </script>
+    </div><!-- End Edit Full Screen Modal მოდალის ფანჯარა-->
+
+    <!-- Edit Full Screen Modal მოდალის ფანჯარა-->
+    <div class="modal fade" id="add-fullscreenModal" tabindex="-1">
+        <script>
+            loadLayout("add-fullscreenModal", "assets/htmlLayouts/layout-order-add-modal.html");
+        </script>
+    </div><!-- End Edit Full Screen Modal მოდალის ფანჯარა-->
+
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer"></footer><!-- End Footer -->
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="assets/vendor/echarts/echarts.min.js"></script>
+    <script src="assets/vendor/quill/quill.js"></script>
+    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+
+    <script src="assets/js/layouts/footers/layout-footer.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+
+    <script src="assets/js/orders/activateButtons.js" defer></script>
+    <script type="module" src="assets/js/orders/order.js" defer></script>
+
+    <!-- <script src="assets/js/behaviors/modalAction.js" defer></script> -->
+</body>
+
+</html>

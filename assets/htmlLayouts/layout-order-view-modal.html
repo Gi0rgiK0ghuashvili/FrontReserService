@@ -1,0 +1,97 @@
+<div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Full Screen Modal</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="p-4">
+
+                <!-- უკან დაბრუნების ღილაკი
+                <div type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-arrow-left"></i> უკან შაბლონების სიაზე
+                </div> -->
+
+                <!-- Guest-ის ინფორმაცია -->
+                <div class="guest-info-card">
+                    <div class="guest-info-header">
+                        <i class="fas fa-user-circle"></i>
+                        სტუმრის ინფორმაცია - xax
+                    </div>
+                    <div class="guest-info-grid">
+                        <div class="guest-info-item">
+                            <div class="guest-info-label">სახელი:</div>
+                            <div class="guest-info-value" id="view-modalName">xax</div>
+                        </div>
+                        <div class="guest-info-item">
+                            <div class="guest-info-label">ტელეფონი:</div>
+                            <div class="guest-info-value">
+                                <a href="tel:xaxa" style="text-decoration: none; color: inherit;">
+                                    <i class="fas fa-phone" id="view-modalPhone"></i> xaxa </a>
+                            </div>
+                        </div>
+                        <div class="guest-info-item">
+                            <div class="guest-info-label">ელ. ფოსტა:</div>
+                            <div class="guest-info-value">
+                                <a href="mailto:xaxa" style="text-decoration: none; color: inherit;">
+                                    <i class="fas fa-envelope" id="view-modalEmail"></i> xaxa </a>
+                            </div>
+                        </div>
+                        <div class="guest-info-item">
+                            <div class="guest-info-label">ჯავშნის თარიღი:</div>
+                            <div class="guest-info-value highlight" id="view-modalReservationDate">
+                                <i class="fas fa-calendar"></i> 15/12/2025
+                            </div>
+                        </div>
+                        <div class="guest-info-item">
+                            <div class="guest-info-label">ჯავშნის დრო:</div>
+                            <div class="guest-info-value highlight" id="view-modalReservationTime">
+                                <i class="fas fa-clock"></i> 11:00
+                            </div>
+                        </div>
+                        <div class="guest-info-item">
+                            <div class="guest-info-label">სტუმრების რაოდენობა:</div>
+                            <div class="guest-info-value highlight" id="view-modalGuests">
+                                <i class="fas fa-users"></i> 2 ადამიანი
+                            </div>
+                        </div>
+                        <div class="guest-info-item">
+                            <div class="guest-info-label">დარბაზი/განლაგება:</div>
+                            <div class="guest-info-value" id="view-modalHall">xx</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- შერჩეული შაბლონის დეტალური ნახვა -->
+                <div class="card">
+                    <div class="card-header">
+                        <span>მენიუ: <strong>შეკვეთა_2025-10-15_11:54</strong></span>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <table class="table table-striped table-hover" id="view-menuTable">
+                                <thead>
+                                    <!-- თითოეული ქვეკატეგორიისთვის header -->
+                                    <tr class="category-header">
+                                        <th class="category-name-cell" colspan="3">ალკოჰოლური სასმელები /
+                                            Beverages </th>
+                                        <th class="category-header-excel"></th>
+                                        <th class="category-header-excel"></th>
+                                        <th class="category-header-excel"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="view-modal-tableBody">
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>

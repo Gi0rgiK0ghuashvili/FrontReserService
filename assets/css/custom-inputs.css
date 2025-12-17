@@ -1,0 +1,4 @@
+.guest-info-value input,
+.guest-info-value select {
+  border-radius: 8px;
+}

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Tables</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="" rel="icon">
+  <link href="" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <script type="module" src="assets/js/behaviors/authGuard.js"></script>
+</head>
+
+<body>
+  <script src="/assets/js/layouts/layout_main.js"></script>
+  <!-- ======= Header ======= -->
+  <header id="headerLayout">
+    <script>
+      loadLayout("headerLayout", "/assets/htmlLayouts/layout_header.html");
+    </script>
+  </header><!-- End Header -->
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebarLayout">
+    <script>
+      loadLayout("sidebarLayout", "/assets/htmlLayouts/layout_aside.html");
+    </script>
+  </aside><!-- End Sidebar-->
+
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Employees Tables</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Tables</li>
+          <li class="breadcrumb-item active">Employees</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <!--მონახემების დამატების სექცია - დასაწყისი-->
+    <section class="section">
+      <div class="card p-3">
+        <form id="searchForm" name="employees" class="row g-3">
+          <div class="col-md-4">
+            <label for="add-name" class="form-label">სახელი</label>
+            <input type="text" id="add-name" class="form-control" placeholder="მაგ: სახელი">
+          </div>
+          <div class="col-md-4">
+            <label for="add-surname" class="form-label">გვარი</label>
+            <input type="text" id="add-surname" class="form-control" placeholder="მაგ: გვარი">
+          </div>
+          <div class="col-md-4">
+            <label for="add-username" class="form-label">მომხმარებლის სახელი</label>
+            <input type="text" id="add-username" class="form-control" placeholder="მაგ: მომხმარებლის სახელი">
+          </div>
+          <div class="col-md-4">
+            <label for="add-email" class="form-label">Email</label>
+            <input type="text" id="add-email" class="form-control" placeholder="მაგ: email@domain.ge">
+          </div>
+          <div class="col-md-4">
+            <label for="add-phoneNumber" class="form-label">მობილურის ნომერი</label>
+            <input type="text" id="add-phoneNumber" class="form-control" placeholder="მაგ: 123456789">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label fw-bold" for="userRole">
+              <i class="bi bi-shield-check me-2"></i>როლი
+              <div class="invalid-feedback">Please, enter your name!</div>
+            </label>
+            <select name="role" id="add-userRole" class="form-select" required="">
+              <option value="SuperAdmin">SuperAdmin</option>
+              <option value="Admin">Admin</option>
+              <option value="Manager">Manager</option>
+              <option value="Employee">Employee</option>
+              <option value="User">User</option>
+              <option value="Customer">Customer</option>
+              <option value="None" selected>None</option>
+            </select>
+            <div class="invalid-feedback">გთხოვთ აირჩიოთ როლი!</div>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label fw-bold" for="add-password">
+              <i class="bi bi-key me-2"></i>პაროლი
+            </label>
+            <input type="password" name="add-password" id="add-password" class="form-control" required="">
+            <div class="invalid-feedback">Please, enter your password!</div>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label fw-bold" for="add-confirmPassword">
+              <i class="bi bi-key me-2"></i>გაიმეორეთ პაროლი
+            </label>
+            <input type="password" name="add-confirmPassword" id="add-confirmPassword" class="form-control" required="">
+            <div class="invalid-feedback">Please, enter your confirmpassword!</div>
+          </div>
+          <div class="text-center">
+            <button type="button" name="employees" id="add-button" class="btn btn-primary">დამატება</button>
+          </div>
+        </form>
+      </div>
+    </section>
+    <!--მონახემების დამატების სექცია - დასასრული-->
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-8">
+          <div class="row">
+
+            <!-- Recent Sales -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+                <div class="card-body">
+                  <h5 class="card-title">Recent Sales <span>| Today</span></h5>
+
+                  <table class="table table-borderless">
+                    <thead>
+                      <tr>
+                        <th>სახელი</th>
+                        <th>გვარი</th>
+                        <th>Email</th>
+                        <th>მომხმარებლის სახელი</th>
+                        <th>მობილურის ნომერი</th>
+                        <th>როლი</th>
+                      </tr>
+                    </thead>
+                    <tbody id="employeesTableBody"></tbody>
+                  </table>
+
+                </div>
+
+              </div>
+            </div><!-- End Recent Sales -->
+          </div>
+        </div><!-- End Left side columns -->
+
+        <!-- Right side columns -->
+        <div class="col-lg-4">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">ძებნის პარამეტრები</h5>
+
+              <!-- Vertical Form -->
+              <form class="row g-3">
+                <div class="col-12">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="text" id="email" class="form-control" placeholder="მაგ: email@domain.ge">
+                </div>
+                <div class="col-12">
+                  <label for="username" class="form-label">მომხმარებლის სახელი</label>
+                  <input type="text" id="username" class="form-control" placeholder="მაგ: მომხმარებლის სახელი">
+                </div>
+                <div class="col-12">
+                  <label for="name" class="form-label">სახელი</label>
+                  <input type="text" id="name" class="form-control" placeholder="მაგ: სახელი">
+                </div>
+                <div class="col-12">
+                  <label for="surname" class="form-label">გვარი</label>
+                  <input type="text" id="surname" class="form-control" placeholder="მაგ: გვარი">
+                </div>
+                <div class="col-12">
+                  <label for="phoneNumber" class="form-label">მობილურის ნომერი</label>
+                  <input type="text" id="phoneNumber" class="form-control" placeholder="მაგ: 123456789">
+                </div>
+                <div class="text-center">
+                  <button type="button" name="employees" id="search-button" class="btn btn-primary">ძებნა</button>
+                </div>
+              </form><!-- Vertical Form -->
+
+            </div>
+          </div>
+
+        </div><!-- End Recent Activity -->
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer"></footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <script src="assets/js/layouts/footers/layout-footer.js"></script>;
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <script type="module" src="/assets/js/employees/employee.js"></script>
+
+</body>
+
+</html>

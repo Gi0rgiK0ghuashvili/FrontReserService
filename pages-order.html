@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Items</title>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="" rel="icon">
+  <link href="" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <script type="module" src="assets/js/behaviors/authGuard.js"></script>
+</head>
+
+<body>
+  
+  <script src="/assets/js/layouts/layout_main.js"></script>
+  <!-- ======= Header ======= -->
+  <header id="headerLayout">
+    <script>
+      loadLayout("headerLayout", "/assets/htmlLayouts/layout_header.html");
+    </script>
+  </header><!-- End Header -->
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebarLayout">
+    <script>
+      loadLayout("sidebarLayout", "/assets/htmlLayouts/layout_aside.html");
+    </script>
+  </aside><!-- End Sidebar-->
+
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Items Tables</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Tables</li>
+          <li class="breadcrumb-item active">Items</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <!--მონაცემების დამატების სექცია - დასაწყისი-->
+    <section class="section">
+      <div class="card p-3">
+        <form id="searchForm" class="row g-3">
+          <div class="col-md-4">
+            <label for="add-item-category-geo" class="form-label">კატეგორია ქართულად</label>
+            <input type="text" id="add-item-category-geo" class="form-control" placeholder="მაგ: კატეგორია">
+          </div>
+          <div class="col-md-4">
+            <label for="add-item-category-eng" class="form-label">კატეგორია ინგლისურად</label>
+            <input type="text" id="add-item-category-eng" class="form-control" placeholder="მაგ: category">
+          </div>
+          <div class="col-md-4">
+            <label for="add-item-name-geo" class="form-label">დასახელება ქართულად</label>
+            <input type="text" id="add-item-name-geo" class="form-control" placeholder="მაგ: დასახელება">
+          </div>
+          <div class="col-md-4">
+            <label for="add-item-name-eng" class="form-label">დასახელება ინგლისურად</label>
+            <input type="text" id="add-item-name-eng" class="form-control" placeholder="მაგ: name">
+          </div>
+          <div class="col-md-4">
+            <label for="add-item-price" class="form-label">ფასი</label>
+            <input type="text" id="add-item-price" class="form-control" placeholder="მაგ: 123456789">
+          </div>
+          <div class="text-center">
+            <button type="button" name="items" id="add-button" class="btn btn-primary">დამატება</button>
+          </div>
+        </form>
+      </div>
+    </section><!--მონაცემების დამატების სექცია - დასასრული-->
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-8">
+          <div class="row">
+            <!-- Recent Sales -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+                <div class="card-body">
+                  <h5 class="card-title">კომპონენტების ცხრილი</h5>
+
+                  <table class="table table-borderless" id="templatesTable">
+                    <thead>
+                      <tr>
+                        <th>კატეგორია ქართულად</th>
+                        <th>კატეგორია ინგლისურად</th>
+                        <th>სახელი ქართლად</th>
+                        <th>სახელი ინგლისურად</th>
+                        <th>ფასი (ლარი)</th>
+                        <th>მოქმედებები</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div><!-- End Recent Sales -->
+          </div>
+        </div><!-- End Left side columns -->
+
+        <!-- Right side columns -->
+        <div class="col-lg-4">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">ძებნის პარამეტრები</h5>
+
+              <!-- Vertical Form -->
+              <form class="row g-3">
+                <div class="col-12">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="text" id="email" class="form-control" placeholder="მაგ: email@domain.ge">
+                </div>
+                <div class="col-12">
+                  <label for="username" class="form-label">მომხმარებლის სახელი</label>
+                  <input type="text" id="username" class="form-control" placeholder="მაგ: მომხმარებლის სახელი">
+                </div>
+                <div class="col-12">
+                  <label for="name" class="form-label">სახელი</label>
+                  <input type="text" id="name" class="form-control" placeholder="მაგ: სახელი">
+                </div>
+                <div class="col-12">
+                  <label for="surname" class="form-label">გვარი</label>
+                  <input type="text" id="surname" class="form-control" placeholder="მაგ: გვარი">
+                </div>
+                <div class="col-12">
+                  <label for="phoneNumber" class="form-label">მობილურის ნომერი</label>
+                  <input type="text" id="phoneNumber" class="form-control" placeholder="მაგ: 123456789">
+                </div>
+                <div class="text-center">
+                  <button type="button" name="items" id="search-button" class="btn btn-primary">ძებნა</button>
+                </div>
+              </form><!-- Vertical Form -->
+
+            </div>
+          </div>
+
+        </div><!-- End Recent Activity -->
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- Viev Full Screen Modal მოდალის ფანჯარა-->
+    <div class="modal fade" id="fullscreenModal" tabindex="-1">
+      <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">View item data</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="p-4">
+
+              <!-- უკან დაბრუნების ღილაკი -->
+              <div class="back-btn">
+                <a href="?" class="btn btn-secondary">
+                  <i class="fas fa-arrow-left"></i> უკან შაბლონების სიაზე
+                </a>
+              </div>
+
+              <!-- Guest-ის ინფორმაცია -->
+              <div class="guest-info-card">
+                <div class="guest-info-header">
+                  <i class="fas fa-user-circle"></i>
+                  სტუმრის ინფორმაცია - xax
+                </div>
+                <div class="guest-info-grid">
+                  <div class="guest-info-item">
+                    <div class="guest-info-label">სახელი:</div>
+                    <div class="guest-info-value" id="modalName">xax</div>
+                  </div>
+                  <div class="guest-info-item">
+                    <div class="guest-info-label">ტელეფონი:</div>
+                    <div class="guest-info-value">
+                      <a href="tel:xaxa" style="text-decoration: none; color: inherit;">
+                        <i class="fas fa-phone" id="modalPhone"></i> xaxa </a>
+                    </div>
+                  </div>
+                  <div class="guest-info-item">
+                    <div class="guest-info-label">ელ. ფოსტა:</div>
+                    <div class="guest-info-value">
+                      <a href="mailto:xaxa" style="text-decoration: none; color: inherit;">
+                        <i class="fas fa-envelope" id="modalEmail"></i> xaxa </a>
+                    </div>
+                  </div>
+                  <div class="guest-info-item">
+                    <div class="guest-info-label">ჯავშნის თარიღი:</div>
+                    <div class="guest-info-value highlight" id="modalReservationDate">
+                      <i class="fas fa-calendar"></i> 15/12/2025
+                    </div>
+                  </div>
+                  <div class="guest-info-item">
+                    <div class="guest-info-label">ჯავშნის დრო:</div>
+                    <div class="guest-info-value highlight" id="modalReservationTime">
+                      <i class="fas fa-clock"></i> 11:00
+                    </div>
+                  </div>
+                  <div class="guest-info-item">
+                    <div class="guest-info-label">სტუმრების რაოდენობა:</div>
+                    <div class="guest-info-value highlight" id="modalGuests">
+                      <i class="fas fa-users"></i> 2 ადამიანი
+                    </div>
+                  </div>
+                  <div class="guest-info-item">
+                    <div class="guest-info-label">დარბაზი/განლაგება:</div>
+                    <div class="guest-info-value" id="modalHall">xx</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- შერჩეული შაბლონის დეტალური ნახვა -->
+              <div class="card">
+                <div class="card-header">
+                  <span>მენიუ: <strong>შეკვეთა_2025-10-15_11:54</strong></span>
+                </div>
+                <div class="card-body">
+                  <div>
+                    <table class="table table-striped table-hover" id="menuTable">
+                      <thead>
+                        <!-- თითოეული ქვეკატეგორიისთვის header -->
+                        <tr class="category-header">
+                          <th class="category-name-cell" colspan="3">ალკოჰოლური სასმელები /
+                            Beverages </th>
+                          <th class="category-header-excel"></th>
+                          <th class="category-header-excel"></th>
+                          <th class="category-header-excel"></th>
+                        </tr>
+                      </thead>
+                      <tbody id="view-modal-tableBody">
+                        <!-- ქვეკატეგორიის რიგი -->
+                        <tr data-id="2178">
+                          <td></td>
+                          <td class="non-editable">დირბულა</td>
+                          <td class="non-editable">Dirbula</td>
+                          <td class="text-center">2</td>
+                          <td class="price-cell text-end">15.00</td>
+                          <td class="price-cell text-end total-cell">30.00 ₾</td>
+                        </tr>
+
+                        <!-- თითოეული ქვეკატეგორიისთვის header -->
+                        <tr class="category-header">
+                          <td class="category-name-cell" colspan="3">ალკოჰოლური სასმელები /
+                            Beverages </td>
+                          <td class="category-header-excel">რაოდენობა</td>
+                          <td class="category-header-excel">ფასი</td>
+                          <td class="category-header-excel">ჯამი</td>
+                        </tr>
+
+                        <!-- ქვეკატეგორიის რიგი -->
+                        <tr data-id="2179">
+                          <td></td>
+                          <td class="non-editable">თელიანი ველი</td>
+                          <td class="non-editable">Teliani Velly</td>
+                          <td class="text-center">1</td>
+                          <td class="price-cell text-end">20.00</td>
+                          <td class="price-cell text-end total-cell">20.00 ₾</td>
+                        </tr>
+
+                        <!-- თითოეული ქვეკატეგორიისთვის header -->
+                        <tr class="category-header">
+                          <td class="category-name-cell" colspan="3">გამაგრილებელი სასმელები /
+                            გამაგრილებელი სასმელები </td>
+                          <td class="category-header-excel">რაოდენობა</td>
+                          <td class="category-header-excel">ფასი</td>
+                          <td class="category-header-excel">ჯამი</td>
+                        </tr>
+
+                        <!-- ქვეკატეგორიის რიგი -->
+                        <tr data-id="2180">
+                          <td></td>
+                          <td class="non-editable">ზანდუკელი</td>
+                          <td class="non-editable">Zandukeli</td>
+                          <td class="text-center">12</td>
+                          <td class="price-cell text-end">5.00</td>
+                          <td class="price-cell text-end total-cell">60.00 ₾</td>
+                        </tr>
+
+                        <!-- თითოეული ქვეკატეგორიისთვის header -->
+                        <tr class="category-header">
+                          <td class="category-name-cell" colspan="3">
+                            სოუსები / სოუსები </td>
+                          <td class="category-header-excel">რაოდენობა</td>
+                          <td class="category-header-excel">ფასი</td>
+                          <td class="category-header-excel">ჯამი</td>
+                        </tr>
+
+                        <!-- ქვეკატეგორიის რიგი -->
+                        <tr data-id="2181">
+                          <td></td>
+                          <td class="non-editable">მაშარაფი</td>
+                          <td class="non-editable">Pomegranate sauce</td>
+                          <td class="text-center">15</td>
+                          <td class="price-cell text-end">6.00</td>
+                          <td class="price-cell text-end total-cell">90.00 ₾</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <!--<button type="button" class="btn btn-primary" id="saveChanges">Save changes</button>
+          
+            -->
+          </div>
+        </div>
+      </div>
+    </div><!-- End Viev Full Screen Modal მოდალის ფანჯარა-->
+    
+    <!-- Edit Full Screen Modal მოდალის ფანჯარა-->
+    <div class="modal fade" id="edit-fullscreenModal" tabindex="-1">
+      <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Edit item data</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="p-4">
+
+              <!-- უკან დაბრუნების ღილაკი -->
+              <div class="back-btn">
+                <a href="?" class="btn btn-secondary">
+                  <i class="fas fa-arrow-left"></i> უკან შაბლონების სიაზე
+                </a>
+              </div>
+
+              <!-- Guest-ის ინფორმაცია -->
+              <div class="guest-info-card">
+                <div class="guest-info-header">
+                  <i class="fas fa-user-circle"></i>
+                  სტუმრის ინფორმაცია - xax
+                </div>
+                <div class="guest-info-grid">
+                  <div class="guest-info-item">
+                    <div class="guest-info-label">სახელი:</div>
+                    <div class="guest-info-value" id="edit-modalName">xax</div>
+                  </div>
+                  <div class="guest-info-item">
+                    <div class="guest-info-label">ტელეფონი:</div>
+                    <div class="guest-info-value">
+                      <a href="tel:xaxa" style="text-decoration: none; color: inherit;">
+                        <i class="fas fa-phone" id="edit-modalPhone"></i> xaxa </a>
+                    </div>
+                  </div>
+                  <div class="guest-info-item">
+                    <div class="guest-info-label">ელ. ფოსტა:</div>
+                    <div class="guest-info-value">
+                      <a href="mailto:xaxa" style="text-decoration: none; color: inherit;">
+                        <i class="fas fa-envelope" id="edit-modalEmail"></i> xaxa </a>
+                    </div>
+                  </div>
+                  <div class="guest-info-item">
+                    <div class="guest-info-label">ჯავშნის თარიღი:</div>
+                    <div class="guest-info-value highlight" id="edit-modalReservationDate">
+                      <i class="fas fa-calendar"></i> 15/12/2025
+                    </div>
+                  </div>
+                  <div class="guest-info-item">
+                    <div class="guest-info-label">ჯავშნის დრო:</div>
+                    <div class="guest-info-value highlight" id="edit-modalReservationTime">
+                      <i class="fas fa-clock"></i> 11:00
+                    </div>
+                  </div>
+                  <div class="guest-info-item">
+                    <div class="guest-info-label">სტუმრების რაოდენობა:</div>
+                    <div class="guest-info-value highlight" id="edit-modalGuests">
+                      <i class="fas fa-users"></i> 2 ადამიანი
+                    </div>
+                  </div>
+                  <div class="guest-info-item">
+                    <div class="guest-info-label">დარბაზი/განლაგება:</div>
+                    <div class="guest-info-value" id="edit-modalHall">xx</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- შერჩეული შაბლონის დეტალური ნახვა -->
+              <div class="card">
+                <div class="card-header">
+                  <span>მენიუ: <strong>შეკვეთა_2025-10-15_11:54</strong></span>
+                </div>
+                <div class="card-body">
+                  <div>
+                    <table class="table table-striped table-hover" id="edit-menuTable">
+                      <thead>
+
+                        <!-- თითოეული ქვეკატეგორიისთვის header -->
+                        <tr class="category-header">
+                          <th class="category-name-cell" colspan="3">ალკოჰოლური სასმელები /
+                            Beverages </th>
+                          <th class="category-header-excel"></th>
+                          <th class="category-header-excel"></th>
+                          <th class="category-header-excel"></th>
+                        </tr>
+
+                      </thead>
+                      <tbody id="edit-modal-tableBody">
+                        <!-- ქვეკატეგორიის რიგი -->
+                        <tr data-id="2178">
+                          <td></td>
+                          <td class="non-editable">დირბულა</td>
+                          <td class="non-editable">Dirbula</td>
+                          <td class="text-center">2</td>
+                          <td class="price-cell text-end">15.00</td>
+                          <td class="price-cell text-end total-cell">30.00 ₾</td>
+                        </tr>
+
+                        <!-- თითოეული ქვეკატეგორიისთვის header -->
+                        <tr class="category-header">
+                          <td class="category-name-cell" colspan="3">ალკოჰოლური სასმელები /
+                            Beverages </td>
+                          <td class="category-header-excel">რაოდენობა</td>
+                          <td class="category-header-excel">ფასი</td>
+                          <td class="category-header-excel">ჯამი</td>
+                        </tr>
+
+                        <!-- ქვეკატეგორიის რიგი -->
+                        <tr data-id="2179">
+                          <td></td>
+                          <td class="non-editable">თელიანი ველი</td>
+                          <td class="non-editable">Teliani Velly</td>
+                          <td class="text-center">1</td>
+                          <td class="price-cell text-end">20.00</td>
+                          <td class="price-cell text-end total-cell">20.00 ₾</td>
+                        </tr>
+
+                        <!-- თითოეული ქვეკატეგორიისთვის header -->
+                        <tr class="category-header">
+                          <td class="category-name-cell" colspan="3">გამაგრილებელი სასმელები /
+                            გამაგრილებელი სასმელები </td>
+                          <td class="category-header-excel">რაოდენობა</td>
+                          <td class="category-header-excel">ფასი</td>
+                          <td class="category-header-excel">ჯამი</td>
+                        </tr>
+
+                        <!-- ქვეკატეგორიის რიგი -->
+                        <tr data-id="2180">
+                          <td></td>
+                          <td class="non-editable">ზანდუკელი</td>
+                          <td class="non-editable">Zandukeli</td>
+                          <td class="text-center">12</td>
+                          <td class="price-cell text-end">5.00</td>
+                          <td class="price-cell text-end total-cell">60.00 ₾</td>
+                        </tr>
+
+                        <!-- თითოეული ქვეკატეგორიისთვის header -->
+                        <tr class="category-header">
+                          <td class="category-name-cell" colspan="3">
+                            სოუსები / სოუსები </td>
+                          <td class="category-header-excel">რაოდენობა</td>
+                          <td class="category-header-excel">ფასი</td>
+                          <td class="category-header-excel">ჯამი</td>
+                        </tr>
+
+                        <!-- ქვეკატეგორიის რიგი -->
+                        <tr data-id="2181">
+                          <td></td>
+                          <td class="non-editable">მაშარაფი</td>
+                          <td class="non-editable">Pomegranate sauce</td>
+                          <td class="text-center">15</td>
+                          <td class="price-cell text-end">6.00</td>
+                          <td class="price-cell text-end total-cell">90.00 ₾</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="saveChanges">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div><!-- End Edit Full Screen Modal მოდალის ფანჯარა-->
+    
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer"></footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Scripts Template File -->
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <script src="assets/js/layouts/footers/layout-footer.js"></script>;
+
+  <script src="assets/js/main.js"></script>
+
+  <!-- Template Main JS File -->
+   
+  <script type="module" src="assets/js/items/item.js" defer></script>
+
+</body>
+
+</html>
