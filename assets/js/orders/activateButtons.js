@@ -3,7 +3,6 @@
     const modalEl = document.getElementById("add-fullscreenModal");
 
     if (!modalEl) {
-        console.error("this is custom error fro ADD-MODAL. Everythings is OK!");
         return;
     }
 

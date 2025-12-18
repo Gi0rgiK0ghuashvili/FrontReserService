@@ -1,3 +1,5 @@
+import { } from "port"
+
 /**
  * ფორმის submit ჰენდლერი — აგზავნის FilterMenuDto ობიექტს
  */
@@ -22,9 +24,8 @@ const filters = {
             method: 'POST',
             headers: {
                   'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${token}` // ✅ გრძელდება ავტორიზაცია
+                  'Authorization': `Bearer ${token}`
              },
-             credentials: 'include',
              body: JSON.stringify(filters)
            });
         if (!response.ok) throw new Error('Network error');

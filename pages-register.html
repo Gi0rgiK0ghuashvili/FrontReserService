@@ -50,6 +50,7 @@
 
   
   <main id="main" class="main">
+
     <div class="pagetitle">
       <h1>Create an Employee</h1>
       <nav>
@@ -59,50 +60,52 @@
         </ol>
       </nav>
     </div><!-- End Page Title -->
+
     <!-- Inputs menu -->
     <div class="card-body">
+      <p class="text-center" id="register-form-notification">message</p>
       <form method="POST" class="row g-3" autocomplete="off" novalidate id="registerForm">
         <div class="col-lg-6 col-md-6">
-          <label class="form-label fw-bold" for="yourName">
+          <label class="form-label fw-bold" for="add-name">
             <i class="bi bi-person me-2"></i>სახელი
           </label>
-          <input type="text" name="yourName" id="yourName" class="form-control" required="">
+          <input type="text" name="add-name" id="add-name" class="form-control" required="">
           <div class="invalid-feedback">Please, enter your name!</div>
         </div>
         <div class="col-lg-6 col-md-6">
-          <label class="form-label fw-bold" for="yourSurname">
+          <label class="form-label fw-bold" for="add-surname">
             <i class="bi bi-person me-2"></i>გვარი
             <div class="invalid-feedback">Please, enter your name!</div>
           </label>
-          <input type="text" name="yourSurname" id="yourSurname" class="form-control" required="">
+          <input type="text" name="add-surname" id="add-surname" class="form-control" required="">
         </div>
         <div class="col-lg-6 col-md-6">
-          <label class="form-label fw-bold" for="username">
+          <label class="form-label fw-bold" for="add-username">
             <i class="bi bi-at me-2"></i>მომხმარებლის სახელი
           </label>
-          <input type="text" name="username" id="username" class="form-control" required="">
+          <input type="text" name="add-username" id="add-username" class="form-control" required="">
           <div class="invalid-feedback">Please, enter your name!</div>
         </div>
         <div class="col-lg-6 col-md-6">
-          <label class="form-label fw-bold" for="yourEmail">
+          <label class="form-label fw-bold" for="add-email">
             <i class="bi bi-envelope me-2"></i>ელ. ფოსტა
             <div class="invalid-feedback">Please, enter your name!</div>
           </label>
-          <input type="email" name="email" id="yourEmail" class="form-control">
+          <input type="email" name="add-email" id="add-email" class="form-control">
         </div>
         <div class="col-lg-6 col-md-6">
-          <label class="form-label fw-bold" for="phoneNumber">
+          <label class="form-label fw-bold" for="add-phoneNumber">
             <i class="bi bi-telephone me-2"></i>ტელეფონი
             <div class="invalid-feedback">Please, enter your name!</div>
           </label>
-          <input type="text" name="phoneNumber" id="phoneNumber" class="form-control" required="">
+          <input type="text" name="add-phoneNumber" id="add-phoneNumber" class="form-control" required="">
         </div>
         <div class="col-lg-6 col-md-6">
-          <label class="form-label fw-bold" for="userRole">
+          <label class="form-label fw-bold" for="add-userRole">
             <i class="bi bi-shield-check me-2"></i>როლი
             <div class="invalid-feedback">Please, enter your name!</div>
           </label>
-          <select name="role" id="userRole" class="form-select" required="">
+          <select name="role" id="add-userRole" class="form-select" required="">
             <option value="SuperAdmin">SuperAdmin</option>
             <option value="Admin">Admin</option>
             <option value="Manager">Manager</option>
@@ -114,25 +117,26 @@
           <div class="invalid-feedback">გთხოვთ აირჩიოთ როლი!</div>
         </div>
         <div class="col-lg-6 col-md-6">
-          <label class="form-label fw-bold" for="password">
+          <label class="form-label fw-bold" for="add-password">
             <i class="bi bi-key me-2"></i>პაროლი
           </label>
-          <input type="password" name="yourPassword" id="password" class="form-control" required="">
+          <input type="password" name="add-password" id="add-password" class="form-control" required="">
           <div class="invalid-feedback">Please, enter your password!</div>
         </div>
         <div class="col-lg-6 col-md-6">
           <label class="form-label fw-bold" for="confirmPassword">
             <i class="bi bi-key me-2"></i>გაიმეორეთ პაროლი
           </label>
-          <input type="password" name="yourConfirmPassword" id="confirmPassword" class="form-control" required="">
+          <input type="password" name="add-confirmPassword" id="add-confirmPassword" class="form-control" required="">
           <div class="invalid-feedback">Please, enter your confirmpassword!</div>
         </div>
+
         <div class="col-12">
-          <button type="submit" name="add_user" class="btn btn-primary w-50 btn-lg">
+          <button type="button" id="add_user" class="btn btn-primary w-50 btn-lg">
             <i class="bi bi-plus-circle me-2"></i>დამატება
           </button>
 
-          <button type="button" name="check_data" class="btn btn-primary btn-lg">
+          <button type="button" id="check_data" class="btn btn-primary btn-lg">
             <i class="bi bi-plus-circle me-2"></i>შემოწმება
           </button>
         </div>
@@ -152,7 +156,7 @@
           <th><i class="bi bi-gear me-1"></i>მოქმედება</th>
         </tr>
       </thead>
-      <tbody id="usersTableBody">
+      <tbody id="tableBody">
         <tr>
           <td class="fw-bold">1</td>
           <td>Giorgi</td>
@@ -162,7 +166,7 @@
           <td>hdh</td>
           <td>
             <button type="button" class="btn btn-sm btn-warning editBtn me-1"
-              data-user="{&quot;id&quot;:&quot;47&quot;,&quot;fl_name&quot;:&quot;Giorgi&quot;,&quot;username&quot;:&quot;Giorgi&quot;,&quot;password&quot;:&quot;$2y$10$Jbe45Ha8npMGfyqW2geBvOdPLA4T9CbEwPm1CpdpUovuBdzyuCzuy&quot;,&quot;role&quot;:&quot;Admin&quot;,&quot;email&quot;:&quot;gdg@gg.ge&quot;,&quot;phone&quot;:&quot;hdh&quot;,&quot;created_at&quot;:&quot;2025-10-21 12:29:56&quot;}"
+              data-user=""
               title="რედაქტირება">
               <i class="bi bi-pencil-square"></i>
             </button>
@@ -176,190 +180,7 @@
             </form>
           </td>
         </tr>
-        <tr>
-          <td class="fw-bold">2</td>
-          <td>ზურა ლაცაბიძე</td>
-          <td><code class="bg-light p-1 rounded">ZAdmin</code></td>
-          <td><span class="badge badge-role bg-primary">Admin</span></td>
-          <td>zurablatsabidze@gmail.com</td>
-          <td>591293422</td>
-          <td>
-            <button type="button" class="btn btn-sm btn-warning editBtn me-1"
-              data-user="{&quot;id&quot;:&quot;46&quot;,&quot;fl_name&quot;:&quot;ზურა ლაცაბიძე&quot;,&quot;username&quot;:&quot;ZAdmin&quot;,&quot;password&quot;:&quot;9BV0okx8&quot;,&quot;role&quot;:&quot;Admin&quot;,&quot;email&quot;:&quot;zurablatsabidze@gmail.com&quot;,&quot;phone&quot;:&quot;591293422&quot;,&quot;created_at&quot;:&quot;2025-07-28 22:10:03&quot;}"
-              title="რედაქტირება">
-              <i class="bi bi-pencil-square"></i>
-            </button>
-
-            <form method="POST" style="display:inline;">
-              <input type="hidden" name="delete_id" value="46">
-              <button type="submit" name="delete_user" class="btn btn-sm btn-danger"
-                onclick="return confirm('ნამდვილად გსურს ზურა ლაცაბიძე-ის წაშლა?')" title="წაშლა">
-                <i class="bi bi-trash3"></i>
-              </button>
-            </form>
-          </td>
-        </tr>
-        <tr>
-          <td class="fw-bold">3</td>
-          <td>MAdmin</td>
-          <td><code class="bg-light p-1 rounded">Madmin</code></td>
-          <td><span class="badge badge-role bg-primary">Admin</span></td>
-          <td>mm@mm.mm</td>
-          <td>432423432</td>
-          <td>
-            <button type="button" class="btn btn-sm btn-warning editBtn me-1"
-              data-user="{&quot;id&quot;:&quot;44&quot;,&quot;fl_name&quot;:&quot;MAdmin&quot;,&quot;username&quot;:&quot;Madmin&quot;,&quot;password&quot;:&quot;$2y$10$YjEd17njibapep1gga9.K.9qNDpi3A3drjAUXUGcGpXmAaKNJgO\/G&quot;,&quot;role&quot;:&quot;Admin&quot;,&quot;email&quot;:&quot;mm@mm.mm&quot;,&quot;phone&quot;:&quot;432423432&quot;,&quot;created_at&quot;:&quot;2025-06-03 20:53:14&quot;}"
-              title="რედაქტირება">
-              <i class="bi bi-pencil-square"></i>
-            </button>
-
-            <form method="POST" style="display:inline;">
-              <input type="hidden" name="delete_id" value="44">
-              <button type="submit" name="delete_user" class="btn btn-sm btn-danger"
-                onclick="return confirm('ნამდვილად გსურს MAdmin-ის წაშლა?')" title="წაშლა">
-                <i class="bi bi-trash3"></i>
-              </button>
-            </form>
-          </td>
-        </tr>
-        <tr>
-          <td class="fw-bold">4</td>
-          <td>ზურაბ ლაცაბიძე</td>
-          <td><code class="bg-light p-1 rounded">SySAdmin</code></td>
-          <td><span class="badge badge-role bg-primary">Admin</span></td>
-          <td>zurablatsabidze@gmail.com</td>
-          <td>591293422</td>
-          <td>
-            <button type="button" class="btn btn-sm btn-warning editBtn me-1"
-              data-user="{&quot;id&quot;:&quot;42&quot;,&quot;fl_name&quot;:&quot;ზურაბ ლაცაბიძე&quot;,&quot;username&quot;:&quot;SySAdmin&quot;,&quot;password&quot;:&quot;$2y$10$FJD\/lh0.hoc8.33HukKmR.lczga1LmyFRwRFwUD9L0ZaY0R6Ywn2S&quot;,&quot;role&quot;:&quot;Admin&quot;,&quot;email&quot;:&quot;zurablatsabidze@gmail.com&quot;,&quot;phone&quot;:&quot;591293422&quot;,&quot;created_at&quot;:&quot;2025-05-30 15:21:51&quot;}"
-              title="რედაქტირება">
-              <i class="bi bi-pencil-square"></i>
-            </button>
-
-            <form method="POST" style="display:inline;">
-              <input type="hidden" name="delete_id" value="42">
-              <button type="submit" name="delete_user" class="btn btn-sm btn-danger"
-                onclick="return confirm('ნამდვილად გსურს ზურაბ ლაცაბიძე-ის წაშლა?')" title="წაშლა">
-                <i class="bi bi-trash3"></i>
-              </button>
-            </form>
-          </td>
-        </tr>
-        <tr>
-          <td class="fw-bold">5</td>
-          <td>ანა მოსიძე</td>
-          <td><code class="bg-light p-1 rounded">amosidze</code></td>
-          <td><span class="badge badge-role bg-success">user</span></td>
-          <td>amosidze@gmtgroup.ge</td>
-          <td>577896512</td>
-          <td>
-            <button type="button" class="btn btn-sm btn-warning editBtn me-1"
-              data-user="{&quot;id&quot;:&quot;39&quot;,&quot;fl_name&quot;:&quot;ანა მოსიძე&quot;,&quot;username&quot;:&quot;amosidze&quot;,&quot;password&quot;:&quot;$2y$10$l2ic57Dmb.UTL1uKIyyxU.3zgNgQ3Jbw0F9ArRQfqa2mKKnOA\/H1K&quot;,&quot;role&quot;:&quot;user&quot;,&quot;email&quot;:&quot;amosidze@gmtgroup.ge&quot;,&quot;phone&quot;:&quot;577896512&quot;,&quot;created_at&quot;:&quot;2025-05-23 16:16:29&quot;}"
-              title="რედაქტირება">
-              <i class="bi bi-pencil-square"></i>
-            </button>
-
-            <form method="POST" style="display:inline;">
-              <input type="hidden" name="delete_id" value="39">
-              <button type="submit" name="delete_user" class="btn btn-sm btn-danger"
-                onclick="return confirm('ნამდვილად გსურს ანა მოსიძე-ის წაშლა?')" title="წაშლა">
-                <i class="bi bi-trash3"></i>
-              </button>
-            </form>
-          </td>
-        </tr>
-        <tr>
-          <td class="fw-bold">6</td>
-          <td>მეკო ბიტარიშვილი</td>
-          <td><code class="bg-light p-1 rounded">mbitarashvilii</code></td>
-          <td><span class="badge badge-role bg-warning">Moderator</span></td>
-          <td>mbitarashvilii@funicular.ge</td>
-          <td>597852369</td>
-          <td>
-            <button type="button" class="btn btn-sm btn-warning editBtn me-1"
-              data-user="{&quot;id&quot;:&quot;38&quot;,&quot;fl_name&quot;:&quot;მეკო ბიტარიშვილი&quot;,&quot;username&quot;:&quot;mbitarashvilii&quot;,&quot;password&quot;:&quot;$2y$10$96eecjJkQvzxPnIhuaLHZupfrafLID2UJNbaXAj1PHwEhLVewvYXK&quot;,&quot;role&quot;:&quot;Moderator&quot;,&quot;email&quot;:&quot;mbitarashvilii@funicular.ge&quot;,&quot;phone&quot;:&quot;597852369&quot;,&quot;created_at&quot;:&quot;2025-05-23 16:15:37&quot;}"
-              title="რედაქტირება">
-              <i class="bi bi-pencil-square"></i>
-            </button>
-
-            <form method="POST" style="display:inline;">
-              <input type="hidden" name="delete_id" value="38">
-              <button type="submit" name="delete_user" class="btn btn-sm btn-danger"
-                onclick="return confirm('ნამდვილად გსურს მეკო ბიტარიშვილი-ის წაშლა?')" title="წაშლა">
-                <i class="bi bi-trash3"></i>
-              </button>
-            </form>
-          </td>
-        </tr>
-        <tr>
-          <td class="fw-bold">7</td>
-          <td>ანუკა მჭედლიშვილი</td>
-          <td><code class="bg-light p-1 rounded">amtchedlishvili</code></td>
-          <td><span class="badge badge-role bg-warning">Moderator</span></td>
-          <td>amtchedlishvili@gmtgroup.ge</td>
-          <td>599632145</td>
-          <td>
-            <button type="button" class="btn btn-sm btn-warning editBtn me-1"
-              data-user="{&quot;id&quot;:&quot;37&quot;,&quot;fl_name&quot;:&quot;ანუკა მჭედლიშვილი&quot;,&quot;username&quot;:&quot;amtchedlishvili&quot;,&quot;password&quot;:&quot;$2y$10$G.SABjQ7n3qX8j6Byb3vHuFfm0w4CsvIuVpTDtQaiq4C58.cp4M.W&quot;,&quot;role&quot;:&quot;Moderator&quot;,&quot;email&quot;:&quot;amtchedlishvili@gmtgroup.ge&quot;,&quot;phone&quot;:&quot;599632145&quot;,&quot;created_at&quot;:&quot;2025-05-23 16:14:38&quot;}"
-              title="რედაქტირება">
-              <i class="bi bi-pencil-square"></i>
-            </button>
-
-            <form method="POST" style="display:inline;">
-              <input type="hidden" name="delete_id" value="37">
-              <button type="submit" name="delete_user" class="btn btn-sm btn-danger"
-                onclick="return confirm('ნამდვილად გსურს ანუკა მჭედლიშვილი-ის წაშლა?')" title="წაშლა">
-                <i class="bi bi-trash3"></i>
-              </button>
-            </form>
-          </td>
-        </tr>
-        <tr>
-          <td class="fw-bold">8</td>
-          <td>ნათია ტაბატაძე</td>
-          <td><code class="bg-light p-1 rounded">ntabatadze</code></td>
-          <td><span class="badge badge-role bg-primary">Admin</span></td>
-          <td>ntabatadze@gmtgroup.ge</td>
-          <td>588741963</td>
-          <td>
-            <button type="button" class="btn btn-sm btn-warning editBtn me-1"
-              data-user="{&quot;id&quot;:&quot;36&quot;,&quot;fl_name&quot;:&quot;ნათია ტაბატაძე&quot;,&quot;username&quot;:&quot;ntabatadze&quot;,&quot;password&quot;:&quot;$2y$10$h3UPQ.7lP5uffPBbPnNEp.FRUKSf3iCa2r93RTD8rMMnyNrRi2q9O&quot;,&quot;role&quot;:&quot;Admin&quot;,&quot;email&quot;:&quot;ntabatadze@gmtgroup.ge&quot;,&quot;phone&quot;:&quot;588741963&quot;,&quot;created_at&quot;:&quot;2025-05-23 16:12:06&quot;}"
-              title="რედაქტირება">
-              <i class="bi bi-pencil-square"></i>
-            </button>
-
-            <form method="POST" style="display:inline;">
-              <input type="hidden" name="delete_id" value="36">
-              <button type="submit" name="delete_user" class="btn btn-sm btn-danger"
-                onclick="return confirm('ნამდვილად გსურს ნათია ტაბატაძე-ის წაშლა?')" title="წაშლა">
-                <i class="bi bi-trash3"></i>
-              </button>
-            </form>
-          </td>
-        </tr>
-        <tr>
-          <td class="fw-bold">9</td>
-          <td>ხათუნა საგანელიძე</td>
-          <td><code class="bg-light p-1 rounded">khatuna</code></td>
-          <td><span class="badge badge-role bg-primary">Admin</span></td>
-          <td>khsaganelidze@gmtgroup.ge</td>
-          <td>555002233</td>
-          <td>
-            <button type="button" class="btn btn-sm btn-warning editBtn me-1"
-              data-user="{&quot;id&quot;:&quot;35&quot;,&quot;fl_name&quot;:&quot;ხათუნა საგანელიძე&quot;,&quot;username&quot;:&quot;khatuna&quot;,&quot;password&quot;:&quot;$2y$10$gRnajOBuAvOsl7CidDDfz.8rtT6oYASuTMlfeJLvfW7FVyEiN\/JOW&quot;,&quot;role&quot;:&quot;Admin&quot;,&quot;email&quot;:&quot;khsaganelidze@gmtgroup.ge&quot;,&quot;phone&quot;:&quot;555002233&quot;,&quot;created_at&quot;:&quot;2025-05-23 16:11:34&quot;}"
-              title="რედაქტირება">
-              <i class="bi bi-pencil-square"></i>
-            </button>
-
-            <form method="POST" style="display:inline;">
-              <input type="hidden" name="delete_id" value="35">
-              <button type="submit" name="delete_user" class="btn btn-sm btn-danger"
-                onclick="return confirm('ნამდვილად გსურს ხათუნა საგანელიძე-ის წაშლა?')" title="წაშლა">
-                <i class="bi bi-trash3"></i>
-              </button>
-            </form>
-          </td>
-        </tr>
+        
       </tbody>
     </table>
     <!--End Of Employees Table-->
@@ -382,6 +203,7 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script type="module" src="assets/js/employees/employee.js"></script>
   
 </body>
 

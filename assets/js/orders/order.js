@@ -1,4 +1,4 @@
-import { checkTokenValidation, sendTest, getRequest, logException } from "../Commons/requests.js";
+import { checkTokenValidation, setRequest, sendTest, getRequest, logException } from "../Commons/requests.js";
 import { generateButtonGroup } from "../Commons/actionButtons.js";
 
 class OrderLine {

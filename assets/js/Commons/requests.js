@@ -1,27 +1,28 @@
 //const apiHost = "10.30.22.53";
 //const apiHost = window.location.hostname;
-//const apiHost = "localhost";
-const apiHost = "10.30.52.50";
+const apiHost = "localhost";
+//const apiHost = "10.30.52.50";
 
-//const port = 5117; // შენი API პორტი
+const port = 5117; // შენი API პორტი
 //const port = 7079; // შენი API პორტი
 //const port = 80; // შენი API პორტი
-const port = 8080; // შენი API პორტი
+//const port = 8080; // შენი API პორტი
 
 const apiFullAddress = `http://${apiHost}:${port}/api`;
 //const apiFullAddress = `http://${apiHost}/api`;
 
 const tokenName = "authToken";
 
-export async function setRequest(controller, endpoint, payload) {
+export async function setRequest(controller, endpoint, data) {
     try {
         const newToken = await checkTokenValidation();
 
         if (!controller) throw "controller is null.";
         if (!endpoint) throw "endpoint is null.";
-        if (!payload) throw "endpoint is null.";
+        if (!data) throw "endpoint is null.";
 
         const api = `${apiFullAddress}/${controller}/${endpoint}`;
+        const payload = JSON.stringify(data);
 
         const response = await fetch(api, {
             method: "POST",
@@ -30,7 +31,7 @@ export async function setRequest(controller, endpoint, payload) {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${newToken.value}`
             },
-            body: JSON.stringify(payload)
+            body: payload
         });
 
         if (response.status !== 200) {
@@ -121,7 +122,6 @@ export async function checkTokenValidation() {
 
         return result;
     }
-
     throw result;
 }
 
