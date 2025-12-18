@@ -11,6 +11,9 @@
     const modal = new bootstrap.Modal(modalEl);
 
     const hideButton = document.getElementById("hide-add-modal");
+    if(!hideButton){
+        return;
+    }
 
     console.log("hideButton: ", hideButton);
 

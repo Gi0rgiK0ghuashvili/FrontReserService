@@ -58,10 +58,10 @@ class Order {
     }
 })();
 
-document.getElementById("searchInput").addEventListener("input", () => {
-    currentPage = 1;
-    loadOrders();
-});
+// document.getElementById("searchInput").addEventListener("input", () => {
+//     currentPage = 1;
+//     loadOrders();
+// });
 
 async function renderTable(items, elementId) {
 
@@ -81,141 +81,50 @@ async function renderTable(items, elementId) {
             console.error("Expected array but got:", items);
             return;
         }
+        let index = 1;
 
         items.forEach(item => {
+            console.log(item);
             // Data Values
             const tr = document.createElement("tr");
-            const tdOrderName = document.createElement("td");
-            const tdTotalAmount = document.createElement("td");
-            const tdReservationDate = document.createElement("td");
-            const tdHallName = document.createElement("td");
 
-            const tdGuestName = document.createElement("td");
-            const tdEmployeeName = document.createElement("td");
-
-
-
-            const spanCustomerPhoneNumber = document.createElement("div");
-            const iCustomerPhoneNumber = document.createElement("i");
-
-            const spanCustomerDateTime = document.createElement("div");
-            const spanCustomerName = document.createElement("div");
-
-
-            const tdPrice = document.createElement("td");
-
-            tdOrderName.textContent = item.orderName;
-            tdOrderName.classList = "text-center";
-
-            tdTotalAmount.textContent = item.totalAmount;
-            tdTotalAmount.classList = "text-center";
-
-            tdReservationDate.textContent = item.reservationDate;
-            tdReservationDate.classList = "text-center";
-
-            tdHallName.textContent = item.hallName;
-            tdHallName.classList = "text-center";
-
-            tdGuestName.classList = "text-center";
-            spanCustomerName.textContent = item.customerName;
-            spanCustomerName.classList = "text-muted";
-            spanCustomerDateTime.textContent = item.reservationDate;
-            spanCustomerDateTime.classList = "text-muted";
-            spanCustomerPhoneNumber.textContent = item.customerPhoneNumber;
-            spanCustomerPhoneNumber.classList = "text-muted";
-
-            tdGuestName.appendChild(spanCustomerName);
-            tdGuestName.appendChild(spanCustomerPhoneNumber);
-            tdGuestName.appendChild(spanCustomerDateTime);
-
-            tdEmployeeName.textContent = item.employeeName;
-            tdEmployeeName.classList = "text-center";
+            const tdIndex = createTd(index, true);
+            const tdOrderName = createTd(item.orderName);
+            const tdTotalAmount = createTd(item.totalAmount, true);
+            const tdReservationDate = createDateTimeTd(item.reservationDate, item.reservationTime);
+            const tdHallName = createTd(item.hallName);
+            const tdGuestName = createGuestTd(item.customerName, item.customerEmail, item.customerPhoneNumber);
+            const tdEmployee = createEmployeeTd(item.employeeName, item.employee.email, item.employee.phoneNumber);
 
             // Status td Element
-            const tdOrderStatus = document.createElement("td");
-            tdOrderStatus.classList = "text-center";
-            // Select Element
-            const selectOrderStatus = document.createElement("select");
-            selectOrderStatus.classList = "status-select";
-            selectOrderStatus.addEventListener("change", (event) => { changedSelectedStatus(event) });
-            selectOrderStatus.setAttribute("data-template", item.orderName);
-            selectOrderStatus.setAttribute("data-original", item.orderName);
-            // Options Values
-            // optionPending
-            const optionPending = document.createElement("option");
-            optionPending.value = "pending";
-            optionPending.textContent = "მიმდინარე";
-
-            // optionReturn
-            const optionReturn = document.createElement("option");
-            optionReturn.value = "return";
-            optionReturn.textContent = "დაბრუნებული";
-
-            // optionCompleted
-            const optionCompleted = document.createElement("option");
-            optionCompleted.value = "completed";
-            optionCompleted.textContent = "დასრულებული";
-
-            // optionCanceled
-            const optionCanceled = document.createElement("option");
-            optionCanceled.value = "canceled";
-            optionCanceled.textContent = "გაუქმებული";
-
-            // Selected Default Option by value
-            if (item.orderStatus === "Pending") {
-                optionPending.selected = true;
-            } else if (item.orderStatus === "Return") {
-                optionReturn.selected = true;
-            } else if (item.orderStatus === "Completed") {
-                optionCanceled.selected = true;
-            } else if (item.orderStatus === "Canceled") {
-                optionCanceled.selected = true;
-            }
-            else {
-                optionPending.selected = true;
-            }
-            // END Options Values
-
-
-            selectOrderStatus.appendChild(optionPending);
-            selectOrderStatus.appendChild(optionReturn);
-            selectOrderStatus.appendChild(optionCompleted);
-            selectOrderStatus.appendChild(optionCanceled);
-
-            tdOrderStatus.appendChild(selectOrderStatus);
-            // END Select Element
-
-
-            tdPrice.textContent = item.price;
-
+            const tdOrderStatus = createStatusTd(item.orderStatus);;
+            
             // Build Table
+            tr.appendChild(tdIndex);
             tr.appendChild(tdOrderName);
             tr.appendChild(tdTotalAmount);
             tr.appendChild(tdReservationDate);
             tr.appendChild(tdHallName);
             tr.appendChild(tdGuestName);
-            tr.appendChild(tdEmployeeName);
+            tr.appendChild(tdEmployee);
             tr.appendChild(tdOrderStatus);
 
             const td = generateButtonGroup(item.id)
+
             tr.appendChild(td);
+
             tableBody.appendChild(tr);
+            index++;
         });
 
     }
     catch (exception) {
+        console.error(exception);
         await logException(exception);
     }
 }
 
-function changedSelectedStatus(event) {
 
-    const modalWindow = new bootstrap.Modal(document.getElementById("fullscreenModal"));
-    modalWindow.show();
-    console.log("this is firs log");
-    console.log(event.target);
-
-}
 
 function showModal(event) {
     const divModalShow = event.target;
@@ -249,6 +158,170 @@ function showModal(event) {
     return result;
 
 }
+
+function createHeaderCard(value) {
+    const td = document.createElement("td");
+
+    td.textContent = value;
+    td.setAttribute("data-value", value);
+    td.classList = "text-center";
+
+    return td;
+}
+
+function createTd(value, isBold = false) {
+    const td = document.createElement("td");
+
+    td.textContent = value;
+    td.setAttribute("data-value", value);
+    td.classList = "text-center";
+    if (isBold === true) {
+        td.classList.add("fw-bold");
+    }
+
+    return td;
+}
+
+function createDateTimeTd(date, time = null, isBold = false) {
+    const td = document.createElement("td");
+    const divDate = document.createElement("div");
+    const divTime = document.createElement("div");
+
+    divDate.textContent = date;
+    divDate.setAttribute("data-value", date);
+    divDate.classList = "text-center";
+    if (isBold === true) {
+        divDate.classList.add("fw-bold");
+    }
+    td.appendChild(divDate);
+
+    if (time !== null) {
+        divTime.textContent = time;
+        divTime.setAttribute("data-value", time);
+        divTime.classList = "text-center";
+        if (isBold === true) {
+            divTime.classList.add("fw-bold");
+        }
+        td.appendChild(divTime);
+    }
+
+    return td;
+}
+
+function createGuestTd(fullname, email = null, phone = null, isBold = false) {
+    const td = document.createElement("td");
+    const divFullname = document.createElement("div");
+    const divEmail = document.createElement("div");
+    const divPhone = document.createElement("div");
+
+
+    divFullname.textContent = fullname;
+    divFullname.setAttribute("data-fullname", fullname);
+    divFullname.classList = "text-center";
+    if (isBold === true) {
+        divFullname.classList.add("fw-bold");
+    }
+    td.appendChild(divFullname);
+
+    if (email !== null) {
+        divEmail.textContent = email;
+        divEmail.setAttribute("data-email", email);
+        divEmail.classList = "text-center";
+        if (isBold === true) {
+            divEmail.classList.add("fw-bold");
+        }
+        td.appendChild(divEmail);
+    }
+
+    if (phone !== null) {
+        divPhone.textContent = phone;
+        divPhone.setAttribute("data-phone", phone);
+        divPhone.classList = "text-center";
+        if (isBold === true) {
+            divPhone.classList.add("fw-bold");
+        }
+        td.appendChild(divPhone);
+    }
+    return td;
+}
+
+function createEmployeeTd(fullname, email = null, phone = null, isBold = false) {
+    const td = document.createElement("td");
+    const divFullname = document.createElement("div");
+    const divEmail = document.createElement("div");
+    const divPhone = document.createElement("div");
+
+
+    divFullname.textContent = fullname;
+    divFullname.setAttribute("data-fullname", fullname);
+    divFullname.classList = "text-center";
+    if (isBold === true) {
+        divFullname.classList.add("fw-bold");
+    }
+    td.appendChild(divFullname);
+
+    if (email !== null) {
+        divEmail.textContent = email;
+        divEmail.setAttribute("data-email", email);
+        divEmail.classList = "text-center";
+        if (isBold === true) {
+            divEmail.classList.add("fw-bold");
+        }
+        td.appendChild(divEmail);
+    }
+
+    if (phone !== null) {
+        divPhone.textContent = phone;
+        divPhone.setAttribute("data-phone", phone);
+        divPhone.classList = "text-center";
+        if (isBold === true) {
+            divPhone.classList.add("fw-bold");
+        }
+        td.appendChild(divPhone);
+    }
+    return td;
+}
+
+function createStatusTd(value, isBold = false) {
+    const td = document.createElement("td");
+    const selectOrderStatus = document.createElement("select");
+
+    const optionPending = createOption("მიმდინარე", "pending", value);
+    const optionReturn = createOption("დაბრუნებული", "return", value);
+    const optionCompleted = createOption("დასრულებული", "completed", value);
+    const optionCanceled = createOption("გაუქმებული", "canceled", value);
+
+
+    //selectOrderStatus.classList = "text-center";
+    selectOrderStatus.classList.add("status-select");
+    selectOrderStatus.addEventListener("change", (event) => { changedSelectedStatus(event) });
+    selectOrderStatus.setAttribute("data-template", value);
+    selectOrderStatus.setAttribute("data-original", value);
+
+    if (isBold === true) {
+        selectOrderStatus.classList.add("fw-bold");
+    }
+    selectOrderStatus.appendChild(optionPending);
+    selectOrderStatus.appendChild(optionReturn);
+    selectOrderStatus.appendChild(optionCompleted);
+    selectOrderStatus.appendChild(optionCanceled);
+
+    td.appendChild(selectOrderStatus);
+    return td;
+}
+function changedSelectedStatus(event) {
+    console.log("this is firs log");
+    console.log(event.target);
+}
+function createOption(textContent, value, data) {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = textContent;
+    option.selected = value === data;
+
+    return option;
+}
+
 
 function saveChanges() {
     const data = {

@@ -153,7 +153,7 @@ function createTD(value, isIndex = false) {
     td.textContent = value;
     td.setAttribute("data-value", value);
     if (isIndex === true) {
-        td.classList = "fw-bold";
+        td.classList.add("fw-bold");
     }
 
     return td;
