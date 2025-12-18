@@ -84,7 +84,7 @@ async function renderTable(items, elementId) {
         let index = 1;
 
         items.forEach(item => {
-            console.log(item);
+            
             // Data Values
             const tr = document.createElement("tr");
 

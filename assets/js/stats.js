@@ -5,10 +5,7 @@ const ordersText = document.getElementById("ordersReport");
 await getData();
 
 async function getData() {
-        console.log("ordersText", ordersText);
-
     if (!ordersText) {
-        console.log("ordersText", ordersText);
         return;
     }
 
@@ -17,8 +14,6 @@ async function getData() {
     if(result.statusCode !== 200) 
         throw result;
 
-        console.log(result);
-        
     setStatsResult(result.value);
 }
 
