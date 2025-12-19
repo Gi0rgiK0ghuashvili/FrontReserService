@@ -7,7 +7,7 @@ const tokenName = "authToken";
         const token = localStorage.getItem(tokenName);
         if(!token)
         {
-            window.location.href = "pages-error-404.html";
+            window.location.href = "pages-login.html";
         }
         
         const checked = await checkTokenValidation();

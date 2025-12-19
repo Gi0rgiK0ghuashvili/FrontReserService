@@ -3,6 +3,7 @@
 
     const logOutNavLink = document.getElementById("logOut-navLink");
     const logOutMenuBtn = document.getElementById("logout");
+
     console.log("logOutNavLink: ", logOutNavLink);
     console.log("logOutMenuBtn: ", logOutMenuBtn);
 
@@ -13,6 +14,23 @@
   })
 })();
 
+document.addEventListener("DOMContentLoaded", () => {
+
+  // LogOut FORM
+  document.getElementById("logOut-navLink")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    
+    logOut(); });
+});
+
+
+function logOut() {
+  const span = document.getElementById("mySpan");
+
+  span.addEventListener("click", () => {
+    alert("Span ელემენტზე დაკლიკდა!");
+  });
+}
 
 
 function userLogOut(event) {
@@ -27,22 +45,6 @@ function userLogOut(event) {
   if (token) {
     localStorage.removeItem("authToken");
     console.log("token removed.");
-  }
-
-  let cookieExists = false;
-  console.log("this is coockie: ", cookieExists);
-
-  for (let c of cookies) {
-    const [name, value] = c.trim().split("=");
-    if (name === cookieName && value) {
-      cookieExists = true;
-      break;
-    }
-  }
-
-  if (cookieExists) {
-    console.log("the coockie is alive: ", cookieExists);
-    localStorage.removeItem("authToken");
   }
 
   window.location.href = "pages-login.html";

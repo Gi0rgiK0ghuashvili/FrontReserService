@@ -1,12 +1,12 @@
 //const apiHost = "10.30.22.53";
 //const apiHost = window.location.hostname;
-const apiHost = "localhost";
-//const apiHost = "10.30.52.50";
+//const apiHost = "localhost";
+const apiHost = "10.30.52.50";
 
-const port = 5117; // შენი API პორტი
+//const port = 5117; // შენი API პორტი
 //const port = 7079; // შენი API პორტი
 //const port = 80; // შენი API პორტი
-//const port = 8080; // შენი API პორტი
+const port = 8080; // შენი API პორტი
 
 const apiFullAddress = `http://${apiHost}:${port}/api`;
 //const apiFullAddress = `http://${apiHost}/api`;
@@ -50,7 +50,7 @@ export async function getRequest(controller, endpoint, payload = null) {
     try {
         const newToken = await checkTokenValidation();
 
-        if(newToken.statusCode !== 200){
+        if (newToken.statusCode !== 200) {
             localStorage.removeItem(tokenName);
             window.location.href = "pages-login.html";
             return;
@@ -74,10 +74,10 @@ export async function getRequest(controller, endpoint, payload = null) {
         if (response.status !== 200) {
             throw response;
         }
-        
+
         const result = await response.json();
         return result;
-    } 
+    }
     catch (error) {
 
         console.log("First ex: ", error);
@@ -131,20 +131,22 @@ export async function logIn(model) {
     if (!model.password) throw new Error("password is null");
 
     const payload = JSON.stringify(model);
+
     const api = `${apiFullAddress}/auth/login`;
     try {
         const response = await fetch(api, {
             method: "POST",
-            headers: { 
-                "Accept": "application/json", 
-                "Content-Type": "application/json" 
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
             },
             body: payload
         });
 
-        if (!response.ok) {
+        if (response.status !== 200) {
+            console.log(response);
             const error = await response.json().catch(() => null);
-            throw error || new Error(`HTTP error ${response.status}`);
+            throw error || new Error(`HTTP error ${response.statusCode}`);
         }
 
         const result = await response.json();
@@ -189,28 +191,52 @@ export async function logException(ex) {
 }
 
 export async function sendTest() {
-    return new Promise((resolve, reject) => {
+    // return new Promise((resolve, reject) => {
+    //         const api = `${apiFullAddress}/auth/testApi`;
+
+    //         const res = fetch(api, {
+    //             method: "POST",
+    //             headers: {
+    //                 "Accept": "application/json",
+    //                 "Content-Type": "application/json"
+    //             }
+    //         })
+    //             .then(response => {
+    //                 if(response.ok === true){
+    //                     const responseToJson = response.json();
+    //                     if (response.statusCode === 200) {
+    //                         console.log(response);
+    //                         return response.json();
+    //                     }
+    //                     console.log(responseToJson);
+    //                 }
+    //                     reject(response);
+    //             })
+    //             .then(result => {
+    //                 if (result.response) {
+    //                     resolve(result.response);
+    //                 }
+    //                 console.log(result);
+    //                 reject(result);
+    //             })
+    //             .catch(error => reject(error));
+    //     });
+    try {
+
         const api = `${apiFullAddress}/auth/testApi`;
 
-        const res = fetch(api, {
+        const response = await fetch(api, {
             method: "POST",
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
             }
-        })
-            .then(response => {
-                if (response.status === 200) {
-                    return response.json();
-                }
-                reject(response);
-            })
-            .then(result => {
-                if (result.response) {
-                    resolve(result.response);
-                }
-                reject(result);
-            })
-            .catch(error => reject(error));
-    });
+        });
+        console.log(response);
+        return response;
+
+    }
+    catch (ex) {
+
+    }
 }

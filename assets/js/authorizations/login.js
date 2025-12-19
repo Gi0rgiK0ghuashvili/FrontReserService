@@ -17,68 +17,43 @@ import { logIn, sendTest } from "../Commons/requests.js";
       };
 
       try {
-        console.log(payload);
-
-        console.log("Starting test method...");
         await sendTest()
           .then((result) => {
+            if (result.status !== 200) {
+              console.log(result)
+              showMessage("ავტორიზაცია ვერ განხორციელდა");
+            }
             console.log(result)
+            showMessage("ავტორიზაცია წარმატებით გაიარეთ", true);
+
 
           })
           .catch(error => {
-            showError("Operation Test failed: ", error);
-
+            showMessage(error);
+            return;
           });
-        console.log("End test method...");
 
+        const res = await logIn(payload);
 
-        console.log("start operation...");
-        // Login Section
-        await logIn(payload)
-          .then((response) => {
-            console.log("Operation succeed.", response);
-            window.location.href = "index.html";
-          })
-          .catch(error => {
-            console.log("Operation failed.");
-            showError(error);
-          });
+        console.log("Operation succeed.", res);
+        //window.location.href = "index.html";
 
       } catch (err) {
-        showError(error);
+        showMessage(err);
       }
     });
 
   });
 
+
 })();
 
-document.addEventListener("DOMContentLoaded", () => {
 
-  // LogOut FORM
-  document.getElementById("logout")?.addEventListener("submit", (e) => {
-    e.preventDefault();
 
-    try {
-
-    } catch (err) {
-      showError(error);
-    }
-  });
-
-});
-
-function logOut() {
-  const span = document.getElementById("mySpan");
-
-  span.addEventListener("click", () => {
-    alert("Span ელემენტზე დაკლიკდა!");
-  });
-}
-
-function showError(error = "") {
+function showMessage(error = "", succeed = false) {
   const errorLogin = document.getElementById("errorLogin");
-
   errorLogin.textContent = error;
   errorLogin.style.color = "red";
+  if (succeed)
+    errorLogin.style.color = "green";
 }
