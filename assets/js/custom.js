@@ -1,4 +1,4 @@
-import { } from "port"
+import { getRequest, setRequest, logException, checkTokenValidation, sendTest} from "..js/Commons/requests.js"
 
 /**
  * ფორმის submit ჰენდლერი — აგზავნის FilterMenuDto ობიექტს
@@ -20,14 +20,8 @@ const filters = {
   };
 
     try {
-        const response = await fetch('https://localhost:7079/api/home/search', {
-            method: 'POST',
-            headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${token}`
-             },
-             body: JSON.stringify(filters)
-           });
+        const response = await fetch("home","search", filters);
+        
         if (!response.ok) throw new Error('Network error');
 
         const data = await response.json();

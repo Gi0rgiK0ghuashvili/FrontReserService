@@ -20,23 +20,24 @@ import { logIn, sendTest } from "../Commons/requests.js";
         await sendTest()
           .then((result) => {
             if (result.status !== 200) {
-              console.log(result)
-              showMessage("ავტორიზაცია ვერ განხორციელდა");
+              console.log(result);
+              showMessage("სერვერთან დაკავშირება ვერ მოხერხდა.");
+              return;
             }
-            console.log(result)
-            showMessage("ავტორიზაცია წარმატებით გაიარეთ", true);
-
-
           })
           .catch(error => {
-            showMessage(error);
-            return;
+            throw error;
           });
 
         const res = await logIn(payload);
 
-        console.log("Operation succeed.", res);
-        //window.location.href = "index.html";
+        if (res.statusCode === 200) {
+          window.location.href = "index.html";
+          return;
+        }
+        console.log(res);
+        showMessage("ავტორიზაცია ვერ მოხერხდა. გთხოვთ დარწმუნდით, რომ სწორად შეგყავთ მომხმარებლის სახელი და პაროლი.");
+
 
       } catch (err) {
         showMessage(err);

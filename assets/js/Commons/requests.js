@@ -144,20 +144,17 @@ export async function logIn(model) {
         });
 
         if (response.status !== 200) {
-            console.log(response);
-            const error = await response.json().catch(() => null);
-            throw error || new Error(`HTTP error ${response.statusCode}`);
+            return await response.json();
         }
-
         const result = await response.json();
 
         localStorage.setItem(tokenName, result.value);
 
         return result;
 
-    } catch (error) {
-        console.error(error);
-        throw error;
+    } catch (ex) {
+        console.error(ex);
+        throw ex;
     }
 }
 
@@ -191,38 +188,7 @@ export async function logException(ex) {
 }
 
 export async function sendTest() {
-    // return new Promise((resolve, reject) => {
-    //         const api = `${apiFullAddress}/auth/testApi`;
-
-    //         const res = fetch(api, {
-    //             method: "POST",
-    //             headers: {
-    //                 "Accept": "application/json",
-    //                 "Content-Type": "application/json"
-    //             }
-    //         })
-    //             .then(response => {
-    //                 if(response.ok === true){
-    //                     const responseToJson = response.json();
-    //                     if (response.statusCode === 200) {
-    //                         console.log(response);
-    //                         return response.json();
-    //                     }
-    //                     console.log(responseToJson);
-    //                 }
-    //                     reject(response);
-    //             })
-    //             .then(result => {
-    //                 if (result.response) {
-    //                     resolve(result.response);
-    //                 }
-    //                 console.log(result);
-    //                 reject(result);
-    //             })
-    //             .catch(error => reject(error));
-    //     });
     try {
-
         const api = `${apiFullAddress}/auth/testApi`;
 
         const response = await fetch(api, {
@@ -232,9 +198,7 @@ export async function sendTest() {
                 "Content-Type": "application/json"
             }
         });
-        console.log(response);
         return response;
-
     }
     catch (ex) {
 

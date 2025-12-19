@@ -4,10 +4,6 @@
     const logOutNavLink = document.getElementById("logOut-navLink");
     const logOutMenuBtn = document.getElementById("logout");
 
-    console.log("logOutNavLink: ", logOutNavLink);
-    console.log("logOutMenuBtn: ", logOutMenuBtn);
-
-
     logOutNavLink.addEventListener("click", (e) => userLogOut(e));
     logOutMenuBtn.addEventListener("click", (e) => userLogOut(e));
 
