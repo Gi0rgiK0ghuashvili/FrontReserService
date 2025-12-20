@@ -17,58 +17,6 @@ class employee {
 
 loadEmployees();
 
-
-const addButton = document.getElementById("add_user");
-
-if (addButton) {
-    addButton.addEventListener("click", async (event) => {
-        event.preventDefault();
-
-        await registerEmployee(event);
-    });
-}
-
-async function registerEmployee(event) {
-    try {
-
-        const employeeData = new employee();
-        employeeData.name = document.getElementById("add-name").value.trim();
-        employeeData.surname = document.getElementById("add-surname").value.trim();
-        employeeData.email = document.getElementById("add-email").value.trim();
-        employeeData.phoneNumber = document.getElementById("add-phoneNumber").value.trim();
-        employeeData.username = document.getElementById("add-username").value.trim();
-        employeeData.password = document.getElementById("add-password").value.trim();
-        employeeData.confirmPassword = document.getElementById("add-confirmPassword").value.trim();
-        employeeData.role = document.getElementById("add-userRole").value.trim();
-
-        console.log(employeeData);
-
-        if (employeeData.name === null) {
-            alert("სახელი ცარიელია.");
-            return;
-        }
-        if (employeeData.surname === null) {
-            alert("გვარი არასწორია.");
-            return;
-        }
-
-        if (employeeData.password != employeeData.confirmPassword) {
-            alert("განმეორებითი პაროლი არასწორია.");
-            return;
-        }
-
-        const result = await setRequest("account", "registerEmployee", employeeData);
-
-        if (result.statusCode === 200) {
-            console.log("result", result);
-        }
-        console.log("result", result);
-    }
-    catch (exception) {
-        console.log(exception);
-    }
-}
-
 async function loadEmployees() {
     try {
         const result = await getRequest("account", "getEmployees");
@@ -225,6 +173,28 @@ function createDeleteButton(value) {
     form.appendChild(input);
     button.appendChild(i);
     form.appendChild(button);
-    
+
     return form;
+}
+
+function showNotification(message, isSucceed = false) {
+    if (!message) {
+        console.error(message);
+        return;
+    }
+
+    const notification = document.getElementById("register-form-notification");
+    if (!notification) {
+
+
+        return;
+    }
+
+    notification.textContent = message;
+    if (isSucceed) {
+        notification.style.color = "green";
+    } else {
+        notification.style.color = "red";
+    }
+
 }

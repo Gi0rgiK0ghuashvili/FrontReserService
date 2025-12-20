@@ -63,7 +63,7 @@
 
     <!-- Inputs menu -->
     <div class="card-body">
-      <p class="text-center" id="register-form-notification">message</p>
+      <p class="text-center" id="register-form-notification"></p>
       <form method="POST" class="row g-3" autocomplete="off" novalidate id="registerForm">
         <div class="col-lg-6 col-md-6">
           <label class="form-label fw-bold" for="add-name">
@@ -124,7 +124,7 @@
           <div class="invalid-feedback">Please, enter your password!</div>
         </div>
         <div class="col-lg-6 col-md-6">
-          <label class="form-label fw-bold" for="confirmPassword">
+          <label class="form-label fw-bold" for="add-confirmPassword">
             <i class="bi bi-key me-2"></i>გაიმეორეთ პაროლი
           </label>
           <input type="password" name="add-confirmPassword" id="add-confirmPassword" class="form-control" required="">
@@ -142,48 +142,6 @@
         </div>
       </form>
     </div> <!--End Inputs menu -->
-
-    <!--Employees Table-->
-    <table class="table table-hover table-striped mb-0" id="usersTable">
-      <thead class="table-primary">
-        <tr>
-          <th><i class="bi bi-hash me-1"></i></th>
-          <th><i class="bi bi-person me-1"></i>სახელი</th>
-          <th><i class="bi bi-at me-1"></i>მომხმარებელი</th>
-          <th><i class="bi bi-shield me-1"></i>როლი</th>
-          <th><i class="bi bi-envelope me-1"></i>ელ. ფოსტა</th>
-          <th><i class="bi bi-telephone me-1"></i>ტელეფონი</th>
-          <th><i class="bi bi-gear me-1"></i>მოქმედება</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody">
-        <tr>
-          <td class="fw-bold">1</td>
-          <td>Giorgi</td>
-          <td><code class="bg-light p-1 rounded">Giorgi</code></td>
-          <td><span class="badge badge-role bg-primary">Admin</span></td>
-          <td>gdg@gg.ge</td>
-          <td>hdh</td>
-          <td>
-            <button type="button" class="btn btn-sm btn-warning editBtn me-1"
-              data-user=""
-              title="რედაქტირება">
-              <i class="bi bi-pencil-square"></i>
-            </button>
-
-            <form method="POST" style="display:inline;">
-              <input type="hidden" name="delete_id" value="47">
-              <button type="submit" name="delete_user" class="btn btn-sm btn-danger"
-                onclick="return confirm('ნამდვილად გსურს Giorgi-ის წაშლა?')" title="წაშლა">
-                <i class="bi bi-trash3"></i>
-              </button>
-            </form>
-          </td>
-        </tr>
-        
-      </tbody>
-    </table>
-    <!--End Of Employees Table-->
 
   </main><!-- End #main -->
 

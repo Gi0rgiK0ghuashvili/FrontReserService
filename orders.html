@@ -30,6 +30,7 @@
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/custom-orders-style.css" rel="stylesheet">
     <!-- <link href="assets/css/custom-style.css" rel="stylesheet"> -->
     <link href="assets/css/custom-inputs.css" rel="stylesheet">
 
@@ -52,6 +53,32 @@
     </aside><!-- End Sidebar-->
 
     <main id="main">
+        <div class="pagetitle page-header">
+            <!-- მარცხენა მხარე -->
+            <div class="page-header-left">
+                <h1>შეკვეთის დამატება</h1>
+                <nav>
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="index.html">მთავარი</a></li>
+                        <li class="breadcrumb-item active">შეკვეთის დამატება</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- მარჯვენა მხარე -->
+            <div class="page-header-actions">
+                <button type="button" class="btn btn-danger btn-sm">
+                    <i class="bi bi-file-earmark-pdf me-1"></i>PDF
+                </button>
+                <button type="button" class="btn btn-info btn-sm">
+                    <i class="bi bi-file-earmark-excel me-1"></i>Excel
+                </button>
+                <button type="button" class="btn btn-success" onclick="window.open('order-add.html', '_blank')"
+                    title="შეკვეთის დამატება">
+                    <i class="bi bi-plus-circle me-1"> </i> შეკვეთის დამატება
+                </button>
+            </div>
+        </div>
+
         <div class="pagetitle">
             <h1>შეკვეთები</h1>
             <nav>
@@ -62,25 +89,15 @@
             </nav>
         </div><!-- End Page Title -->
 
-        <button type="button" class="btn btn-success w-100" onclick="window.open('order-add.html', '_blank')"
-            title="შეკვეთის დამატება">
-            <i class="bi bi-plus-circle me-1"> </i> შეკვეთის დამატება
-        </button>
-
-
         <section class="section">
             <div class="p-4">
                 <!-- Guest-ის ინფორმაცია -->
                 <div class="guest-info-card">
-
                     <div class="guest-info-header">
-
                         <i class="fas fa-user-circle" data-purpose="filter-data" id="filter-guestname">ტელეფონი:
                         </i>
-
                         <p type="text" style="font-size: small;">dfgdfg</p>
                     </div>
-
                     <div class="guest-info-grid">
                         <div class="guest-info-item">
                             <div class="guest-info-label">სახელი:</div>
@@ -146,7 +163,6 @@
                     </div>
                 </div>
         </section>
-
 
         <div class="p-4">
             <div class="card templates-table">

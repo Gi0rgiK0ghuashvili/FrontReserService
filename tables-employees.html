@@ -124,81 +124,49 @@
     </section>
     <!--მონახემების დამატების სექცია - დასასრული-->
 
-    <section class="section dashboard">
-      <div class="row">
+    
+    <!--Employees Table-->
+    <table class="table table-hover table-striped mb-0" id="usersTable">
+      <thead class="table-primary">
+        <tr>
+          <th><i class="bi bi-hash me-1"></i></th>
+          <th><i class="bi bi-person me-1"></i>სახელი</th>
+          <th><i class="bi bi-at me-1"></i>მომხმარებელი</th>
+          <th><i class="bi bi-shield me-1"></i>როლი</th>
+          <th><i class="bi bi-envelope me-1"></i>ელ. ფოსტა</th>
+          <th><i class="bi bi-telephone me-1"></i>ტელეფონი</th>
+          <th><i class="bi bi-gear me-1"></i>მოქმედება</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <tr>
+          <td class="fw-bold">1</td>
+          <td>Giorgi</td>
+          <td><code class="bg-light p-1 rounded">Giorgi</code></td>
+          <td><span class="badge badge-role bg-primary">Admin</span></td>
+          <td>gdg@gg.ge</td>
+          <td>hdh</td>
+          <td>
+            <button type="button" class="btn btn-sm btn-warning editBtn me-1"
+              data-user=""
+              title="რედაქტირება">
+              <i class="bi bi-pencil-square"></i>
+            </button>
 
-        <!-- Left side columns -->
-        <div class="col-lg-8">
-          <div class="row">
+            <form method="POST" style="display:inline;">
+              <input type="hidden" name="delete_id" value="47">
+              <button type="submit" name="delete_user" class="btn btn-sm btn-danger"
+                onclick="return confirm('ნამდვილად გსურს Giorgi-ის წაშლა?')" title="წაშლა">
+                <i class="bi bi-trash3"></i>
+              </button>
+            </form>
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!--End Of Employees Table-->
 
-            <!-- Recent Sales -->
-            <div class="col-12">
-              <div class="card recent-sales overflow-auto">
-                <div class="card-body">
-                  <h5 class="card-title">Recent Sales <span>| Today</span></h5>
-
-                  <table class="table table-borderless">
-                    <thead>
-                      <tr>
-                        <th>სახელი</th>
-                        <th>გვარი</th>
-                        <th>Email</th>
-                        <th>მომხმარებლის სახელი</th>
-                        <th>მობილურის ნომერი</th>
-                        <th>როლი</th>
-                      </tr>
-                    </thead>
-                    <tbody id="employeesTableBody"></tbody>
-                  </table>
-
-                </div>
-
-              </div>
-            </div><!-- End Recent Sales -->
-          </div>
-        </div><!-- End Left side columns -->
-
-        <!-- Right side columns -->
-        <div class="col-lg-4">
-
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">ძებნის პარამეტრები</h5>
-
-              <!-- Vertical Form -->
-              <form class="row g-3">
-                <div class="col-12">
-                  <label for="email" class="form-label">Email</label>
-                  <input type="text" id="email" class="form-control" placeholder="მაგ: email@domain.ge">
-                </div>
-                <div class="col-12">
-                  <label for="username" class="form-label">მომხმარებლის სახელი</label>
-                  <input type="text" id="username" class="form-control" placeholder="მაგ: მომხმარებლის სახელი">
-                </div>
-                <div class="col-12">
-                  <label for="name" class="form-label">სახელი</label>
-                  <input type="text" id="name" class="form-control" placeholder="მაგ: სახელი">
-                </div>
-                <div class="col-12">
-                  <label for="surname" class="form-label">გვარი</label>
-                  <input type="text" id="surname" class="form-control" placeholder="მაგ: გვარი">
-                </div>
-                <div class="col-12">
-                  <label for="phoneNumber" class="form-label">მობილურის ნომერი</label>
-                  <input type="text" id="phoneNumber" class="form-control" placeholder="მაგ: 123456789">
-                </div>
-                <div class="text-center">
-                  <button type="button" name="employees" id="search-button" class="btn btn-primary">ძებნა</button>
-                </div>
-              </form><!-- Vertical Form -->
-
-            </div>
-          </div>
-
-        </div><!-- End Recent Activity -->
-
-      </div>
-    </section>
 
   </main><!-- End #main -->
 
