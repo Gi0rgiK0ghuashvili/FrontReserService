@@ -1,0 +1,74 @@
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap; /* აუცილებელია responsive-სთვის */
+}
+
+/* მარცხენა მხარე */
+.page-header-left {
+    min-width: 260px;
+}
+
+/* ღილაკების კონტეინერი */
+.page-header-actions {
+    display: flex;
+    gap: 8px;
+
+    justify-content: flex-end;
+    align-items: center;
+
+    flex-wrap: wrap-reverse; /* მარჯვნიდან იწყებს დამატებას */
+}
+
+/* პატარა ეკრანები */
+@media (max-width: 768px) {
+    .page-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .page-header-actions {
+        justify-content: flex-start;
+        width: 100%;
+    }
+}
+
+.page-header {
+    position: sticky;
+    top: 60px; /* თუ გაქვს ზედა მთავარი header */
+    z-index: 1000;
+
+    background: #fff;
+    padding: 12px 16px;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.page-header-actions {
+    display: flex;
+    gap: 8px;
+
+    justify-content: flex-end;
+    align-items: center;
+
+    flex-wrap: wrap-reverse;
+}
+
+@media (max-width: 768px) {
+    .page-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .page-header-actions {
+        justify-content: flex-start;
+    }
+}

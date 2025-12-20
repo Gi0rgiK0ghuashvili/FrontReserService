@@ -30,6 +30,7 @@
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/custom-orders-style.css" rel="stylesheet">
     <!-- <link href="assets/css/custom-style.css" rel="stylesheet"> -->
     <link href="assets/css/custom-inputs.css" rel="stylesheet">
 
@@ -52,16 +53,34 @@
     </aside><!-- End Sidebar-->
 
     <main id="main">
-        <div class="pagetitle">
-            <h1>შეკვეთის დამატება</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">მთავარი</a></li>
-                    <li class="breadcrumb-item active">შეკვეთის დამატება</li>
-                </ol>
-            </nav>
-        </div><!-- End Page Title -->
 
+        <div class="pagetitle page-header">
+
+            <!-- მარცხენა მხარე -->
+            <div class="page-header-left">
+                <h1>შეკვეთის დამატება</h1>
+                <nav>
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="index.html">მთავარი</a></li>
+                        <li class="breadcrumb-item active">შეკვეთის დამატება</li>
+                    </ol>
+                </nav>
+            </div>
+
+            <!-- მარჯვენა მხარე -->
+            <div class="page-header-actions">
+                <button type="button" class="btn btn-danger btn-sm">
+                    <i class="bi bi-file-earmark-pdf me-1"></i>PDF
+                </button>
+                <button type="button" class="btn btn-info btn-sm">
+                    <i class="bi bi-file-earmark-excel me-1"></i>Excel
+                </button>
+                <button type="button" class="btn btn-secondary" id="hide-add-modal">Close</button>
+                <button type="button" class="btn btn-primary" id="add-saveChanges">Save changes</button>
+            </div>
+
+        </div>
+        
         <div class="modal-body">
             <div class="p-4">
                 <!-- Guest info -->
@@ -131,7 +150,8 @@
                         </div>
                         <div class="guest-info-item">
                             <div class="guest-info-label">განლაგება:</div>
-                            <input type="text" class="form-control form-control-sm" id="add-guestHallArrangement" value="">
+                            <input type="text" class="form-control form-control-sm" id="add-guestHallArrangement"
+                                value="">
                         </div>
                     </div>
                 </div>
@@ -148,30 +168,40 @@
                                 <!-- დარბაზის არჩევა -->
                                 <div class="col-lg-3 col-md-6">
                                     <label class="form-label">დარბაზი</label>
-                                    <select name="guest-hall" id="guest-hall" class="form-select" onchange="" required="">
+                                    <select name="guest-hall" id="guest-hall" class="form-select" onchange=""
+                                        required="">
                                         <option value="">აირჩიე დარბაზი</option>
-                                        <option value="87" data-category-ka="Test" data-category-en="Test"> Test</option>
-                                        <option value="19" data-category-ka="ალკოჰოლური სასმელები" data-category-en="Beverages"> ალკოჰოლური სასმელები</option>
-                                        <option value="20" data-category-ka="გამაგრილებელი სასმელები" data-category-en="Soft Drinks"> გამაგრილებელი სასმელები</option>
+                                        <option value="87" data-category-ka="Test" data-category-en="Test"> Test
+                                        </option>
+                                        <option value="19" data-category-ka="ალკოჰოლური სასმელები"
+                                            data-category-en="Beverages"> ალკოჰოლური სასმელები</option>
+                                        <option value="20" data-category-ka="გამაგრილებელი სასმელები"
+                                            data-category-en="Soft Drinks"> გამაგრილებელი სასმელები</option>
                                     </select>
 
                                 </div>
 
                                 <div class="col-lg-3 col-md-6">
                                     <label class="form-label">კატეგორია</label>
-                                    <select name="guest-category" id="guest-category" class="form-select" onchange="" required="">
+                                    <select name="guest-category" id="guest-category" class="form-select" onchange=""
+                                        required="">
                                         <option value="" selected>აირჩიე კატეგორია</option>
-                                        <option value="87" data-category-ka="Test" data-category-en="Test"> Test </option>
-                                        <option value="19" data-category-ka="ალკოჰოლური სასმელები" data-category-en="Beverages"> ალკოჰოლური სასმელები</option>
-                                        <option value="20" data-category-ka="გამაგრილებელი სასმელები" data-category-en="Soft Drinks"> გამაგრილებელი სასმელები</option>
+                                        <option value="87" data-category-ka="Test" data-category-en="Test"> Test
+                                        </option>
+                                        <option value="19" data-category-ka="ალკოჰოლური სასმელები"
+                                            data-category-en="Beverages"> ალკოჰოლური სასმელები</option>
+                                        <option value="20" data-category-ka="გამაგრილებელი სასმელები"
+                                            data-category-en="Soft Drinks"> გამაგრილებელი სასმელები</option>
                                     </select>
                                 </div>
 
                                 <div class="col-lg-3 col-md-6">
                                     <label class="form-label">ნივთი</label>
-                                    <select name="guest-item" id="guest-item" class="form-select" onchange="" required="">
-                                        <option value="" >აირჩიე ნივთი</option>
-                                        <option value="20" data-category-ka="გამაგრილებელი სასმელები" data-category-en="Soft Drinks" >გამაგრილებელი სასმელები</option>
+                                    <select name="guest-item" id="guest-item" class="form-select" onchange=""
+                                        required="">
+                                        <option value="">აირჩიე ნივთი</option>
+                                        <option value="20" data-category-ka="გამაგრილებელი სასმელები"
+                                            data-category-en="Soft Drinks">გამაგრილებელი სასმელები</option>
                                     </select>
                                 </div>
 
@@ -182,12 +212,14 @@
                                 </div>
                                 <div class="col-lg-2 col-md-6">
                                     <label class="form-label">ფასი</label>
-                                    <input type="text" name="price" id="price" class="form-control bg-light" required="" readonly>
+                                    <input type="text" name="price" id="price" class="form-control bg-light" required=""
+                                        readonly>
                                 </div>
 
                                 <div class="col-lg-12 col-md-6">
                                     <label class="form-label"></label>
-                                    <button type="button" class="btn btn-success w-100" id="add-items-button" title="დამატება შეკვეთაში">
+                                    <button type="button" class="btn btn-success w-100" id="add-items-button"
+                                        title="დამატება შეკვეთაში">
                                         <i class="bi bi-plus-circle me-1"></i>დამატება
                                     </button>
                                 </div>
@@ -209,7 +241,8 @@
                                 <thead class="table-primary">
                                     <!-- თითოეული ქვეკატეგორიისთვის header -->
                                     <tr class="category-header">
-                                        <th class="category-name-cell" colspan="3">ალკოჰოლური სასმელები / Beverages </th>
+                                        <th class="category-name-cell" colspan="3">ალკოჰოლური სასმელები / Beverages
+                                        </th>
                                         <th class="category-header-excel"></th>
                                         <th class="category-header-excel"></th>
                                         <th class="category-header-excel"></th>
@@ -244,25 +277,16 @@
             </div>
         </div>
 
-        <!-- Footer and Submit Buttons -->
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger btn-sm">
-                <i class="bi bi-file-earmark-pdf me-1"></i>PDF
-            </button>
-
-            <button type="button" class="btn btn-info btn-sm">
-                <i class="bi bi-file-earmark-excel me-1"></i>Excel
-            </button>
-
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="hide-add-modal">Close</button>
-            <button type="button" class="btn btn-primary" id="add-saveChanges">Save changes</button>
-        </div>
-        <!-- END Footer and Submit Buttons -->
 
     </main><!-- End #main -->
-    
+
+    <div>
+        <footer id="footer" class="footer"></footer><!-- End Footer -->
+    </div>
+    <!-- END Footer and Submit Buttons -->
+
+
     <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer"></footer><!-- End Footer -->
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

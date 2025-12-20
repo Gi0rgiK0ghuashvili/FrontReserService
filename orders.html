@@ -62,9 +62,91 @@
             </nav>
         </div><!-- End Page Title -->
 
-        <button type="button" class="btn btn-success w-100" id="add-button" title="შეკვეთის დამატება">
+        <button type="button" class="btn btn-success w-100" onclick="window.open('order-add.html', '_blank')"
+            title="შეკვეთის დამატება">
             <i class="bi bi-plus-circle me-1"> </i> შეკვეთის დამატება
         </button>
+
+
+        <section class="section">
+            <div class="p-4">
+                <!-- Guest-ის ინფორმაცია -->
+                <div class="guest-info-card">
+
+                    <div class="guest-info-header">
+
+                        <i class="fas fa-user-circle" data-purpose="filter-data" id="filter-guestname">ტელეფონი:
+                        </i>
+
+                        <p type="text" style="font-size: small;">dfgdfg</p>
+                    </div>
+
+                    <div class="guest-info-grid">
+                        <div class="guest-info-item">
+                            <div class="guest-info-label">სახელი:</div>
+                            <input type="text" class="form-control form-control-sm" data-purpose="filter-data"
+                                id="filter-modalName" value="">
+                        </div>
+                        <div class="guest-info-item">
+                            <i class="fas fa-phone">
+                                <span class="guest-info-label">ტელეფონი:</span>
+                            </i>
+                            <div class="guest-info-value">
+                                <input type="tel" class="form-control form-control-sm" data-purpose="filter-data"
+                                    id="filter-modalPhone" value="">
+                            </div>
+                        </div>
+                        <div class="guest-info-item">
+                            <i class="fas fa-envelope">
+                                <span class="guest-info-label">ელ. ფოსტა:</span>
+                            </i>
+                            <div class="guest-info-value">
+                                <input type="email" class="form-control form-control-sm" data-purpose="filter-data"
+                                    id="filter-modalEmail" value="">
+                            </div>
+                        </div>
+                        <div class="guest-info-item">
+                            <i class="fas fa-calendar">
+                                <span class="guest-info-label">ჯავშნის თარიღი:</span>
+                            </i>
+                            <div class="guest-info-value highlight">
+                                <input type="date" class="form-control form-control-sm" data-purpose="filter-data"
+                                    id="filter-modalReservationDate" value="">
+                            </div>
+                        </div>
+                        <div class="guest-info-item">
+                            <i class="fas fa-clock">
+                                <span class="guest-info-label">ჯავშნის დრო:</span>
+                            </i>
+                            <div class="guest-info-value highlight">
+                                <input type="time" class="form-control form-control-sm" data-purpose="filter-data"
+                                    id="filter-modalReservationTime" value="11:00">
+                            </div>
+                        </div>
+                        <div class="guest-info-item">
+                            <i class="fas fa-users">
+                                <span class="guest-info-label">სტუმრების რაოდენობა:</span>
+                            </i>
+                            <div class="guest-info-value highlight">
+                                <input type="number" min="1" class="form-control form-control-sm"
+                                    data-purpose="filter-data" id="filter-modalGuests" value="2">
+                            </div>
+                        </div>
+                        <div class="guest-info-item">
+                            <div class="guest-info-label">დარბაზი/განლაგება:</div>
+
+                            <div class="guest-info-value" data-purpose="filter-data">
+                                <select class="form-select form-select-sm" id="filter-modalHall">
+                                    <option value="xx" selected>xx</option>
+                                    <option value="vip">VIP</option>
+                                    <option value="main">Main</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+
 
         <div class="p-4">
             <div class="card templates-table">
