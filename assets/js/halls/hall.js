@@ -2,14 +2,14 @@ import { getRequest, logException, setRequest } from "../Commons/requests.js";
 import {generateButtonGroup } from "../Commons/actionButtons.js";
 // Class implementations
 
-class hall {
+class Hall {
     constructor() {
-        this.nameGeo;
-        this.nameEng;
-        this.locationGeo;
-        this.locationEng;
-        this.description;
-        this.phoneNumber;
+        this.nameGeo = null;
+        this.nameEng = null;
+        this.locationGeo = null;
+        this.locationEng = null;
+        this.description = null;
+        this.phoneNumber = null;
     }
 }
 
@@ -33,7 +33,7 @@ addButton.addEventListener("click", async (e) => {
     e.preventDefault();
 
 
-    const hallData = new hall();
+    const hallData = new Hall();
 
     hallData.nameGeo = document.getElementById("add-hall-name-geo").value.trim();
     hallData.nameEng = document.getElementById("add-hall-name-eng").value.trim();

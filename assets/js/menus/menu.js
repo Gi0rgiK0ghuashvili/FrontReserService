@@ -10,62 +10,30 @@ class item {
     }
 }
 
+class Menu {
+    constructor() {
+        this.nameGeo = null;
+        this.nameEng = null;
 
-const addButton = document.getElementById("add-button");
-addButton.addEventListener("click", async (e) => {
-    e.preventDefault();
+        this.hallNameGeo = null;
+        this.hallNameEng = null;
 
-
-    console.log(addButton.name);
-    console.log("this is items datatabel.");
-
-
-    const itemData = new item();
-    itemData.categoryGeo = document.getElementById("add-item-category-geo").value.trim();
-    itemData.categoryEng = document.getElementById("add-item-category-eng").value.trim();
-    itemData.nameGeo = document.getElementById("add-item-name-geo").value.trim();
-    itemData.nameEng = document.getElementById("add-item-name-eng").value.trim();
-    itemData.price = document.getElementById("add-item-price").value.trim();
-
-
-    if (itemData.nameGeo === null) {
-        alert("სახელი ქართულად ცარიელია.");
-        return;
+        this.items = null;
     }
-    if (itemData.nameEng === null) {
-        alert("სახელი ინგლისურად ცარიელია.");
-        return;
+}
+
+(async function () {
+    console.log("response is sending: ");
+
+    const items = await getRequest("menu", "menus", new Menu());
+
+    console.log("response is: ", items.value);
+
+    if (items.statusCode >= 300) {
+    console.error("items: ", items);
+
     }
-    if (itemData.categoryGeo === null) {
-        alert("კატეგორია ქართულად ცარიელია.");
-        return;
-    }
-    if (itemData.categoryEng === null) {
-        alert("კატეგორია ინგლისურად ცარიელია.");
-        return;
-    }
-    if (itemData.price === null) {
-        alert("ფასი ცარიელია.");
-        return;
-    }
-
-    const itemDataResult = await setRequest("menus", "addMenu", itemData);
-
-    if (!itemDataResult) {
-        console.log(itemDataResult);
-
-        return;
-    }
-
-    console.log("this is from adding item", itemDataResult);
-
-});
-
-(async function() {
-
-    const items = await getRequest("memus", "getMenus");
-    console.log(items.value);
-
+    
     await renderItemsTableById(items.value, "tableBody");
 })();
 
@@ -81,23 +49,23 @@ async function renderItemsTableById(items, elementId) {
 
         const tableBody = document.getElementById(elementId);
 
-        
+
         if (!tableBody) {
             console.error("table not found.");
             return;
         }
-        
+
         tableBody.innerHTML = "";
-        
+
         if (!items) {
             return;
         }
-        
+
         if (!Array.isArray(items)) {
             console.error("Expected array but got:", items);
             return;
         }
-        
+
         items.forEach(item => {
             // Data Values
             const tr = document.createElement("tr");
@@ -106,13 +74,13 @@ async function renderItemsTableById(items, elementId) {
             const categoryGeo = document.createElement("td");
             const categoryEng = document.createElement("td");
             const tdPrice = document.createElement("td");
-            
+
             categoryGeo.textContent = item.categoryGeo;
             categoryEng.textContent = item.categoryEng;
             tdNameGeo.textContent = item.nameGeo;
             tdNameEng.textContent = item.nameEng;
             tdPrice.textContent = item.price;
-            
+
             // 
             // Build Table
             tr.appendChild(categoryGeo);
@@ -120,7 +88,7 @@ async function renderItemsTableById(items, elementId) {
             tr.appendChild(tdNameGeo);
             tr.appendChild(tdNameEng);
             tr.appendChild(tdPrice);
-            
+
             tr.setAttribute("data-id", item.id);
 
             //
@@ -137,24 +105,24 @@ async function renderItemsTableById(items, elementId) {
             td.className = "text-center";
             // --- View button ---
             const viewBtn = document.createElement("a");
-            
-            
+
+
             viewBtn.addEventListener('click', (event) => { showModal(event) });
             viewBtn.className = "btn btn-info btn-sm";
             viewBtn.title = "დეტალური ნახვა";
             const i = document.createElement('i');
-            
+
             //i.classList.add("btn");
             //i.classList.add("btn-primary");
 
             i.classList.add("fas");
             i.classList.add("fa-eye");
-            
+
             i.setAttribute("data-bs-toggle", "modal");
             i.setAttribute("data-bs-target", "#fullscreenModal");
-            
+
             i.setAttribute("data-id", item.id);
-            
+
             viewBtn.appendChild(i);
 
             // --- Edit button ---
@@ -164,31 +132,31 @@ async function renderItemsTableById(items, elementId) {
             editBtn.title = "რედაქტირება";
             editBtn.setAttribute("data-bs-toggle", "modal");
             editBtn.setAttribute("data-bs-target", "#edit-fullscreenModal");
-            
+
             editBtn.innerHTML = `<i class="fas fa-edit"></i>`;
-            
+
             // --- Delete button ---
             const deleteBtn = document.createElement("button");
             deleteBtn.type = "button";
             deleteBtn.className = "btn btn-danger btn-sm delete-template-btn";
             deleteBtn.title = "შაბლონის წაშლა";
             deleteBtn.innerHTML = `<i class="fas fa-trash"></i>`;
-            
+
             // ღილაკების დამატება ჯგუფში
             btnGroup.appendChild(viewBtn);
             btnGroup.appendChild(editBtn);
             btnGroup.appendChild(deleteBtn);
             // ჯგუფის დამატება <td>-ში
             td.appendChild(btnGroup);
-            
+
             tr.appendChild(td);
             //
             //  End Action Buttons Section
             //
-            
+
             tableBody.appendChild(tr);
         });
-        
+
     }
     catch (exception) {
         const ex = {
@@ -201,3 +169,4 @@ async function renderItemsTableById(items, elementId) {
 
     }
 }
+

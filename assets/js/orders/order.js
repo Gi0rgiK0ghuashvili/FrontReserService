@@ -84,7 +84,7 @@ async function renderTable(items, elementId) {
         let index = 1;
 
         items.forEach(item => {
-            
+
             // Data Values
             const tr = document.createElement("tr");
 
@@ -92,13 +92,14 @@ async function renderTable(items, elementId) {
             const tdOrderName = createTd(item.orderName);
             const tdTotalAmount = createTd(item.totalAmount, true);
             const tdReservationDate = createDateTimeTd(item.reservationDate, item.reservationTime);
-            const tdHallName = createTd(item.hallName);
+            const tdHallName = createTd(item.hallNameGeo, false, item.hallNameEng);
+            console.log(item);
             const tdGuestName = createGuestTd(item.customerName, item.customerEmail, item.customerPhoneNumber);
             const tdEmployee = createEmployeeTd(item.employeeName, item.employee.email, item.employee.phoneNumber);
 
             // Status td Element
             const tdOrderStatus = createStatusTd(item.orderStatus);;
-            
+
             // Build Table
             tr.appendChild(tdIndex);
             tr.appendChild(tdOrderName);
@@ -169,16 +170,29 @@ function createHeaderCard(value) {
     return td;
 }
 
-function createTd(value, isBold = false) {
+function createTd(valueGeo, isBold = false, valueEng = null) {
     const td = document.createElement("td");
-
-    td.textContent = value;
-    td.setAttribute("data-value", value);
-    td.classList = "text-center";
-    if (isBold === true) {
-        td.classList.add("fw-bold");
+    if (valueGeo != null) {
+        const divGeo = document.createElement("div");
+        divGeo.textContent = valueGeo;
+        divGeo.setAttribute("data-valueGeo", valueGeo);
+        divGeo.classList = "text-center";
+        if (isBold === true) {
+            divGeo.classList.add("fw-bold");
+        }
+        td.appendChild(divGeo);
     }
 
+    if (valueEng != null) {
+        const divEng = document.createElement("div");
+        divEng.textContent = valueEng;
+        divEng.setAttribute("data-valueEng", valueEng);
+        divEng.classList = "text-center";
+        if (isBold === true) {
+            divEng.classList.add("fw-bold");
+        }
+        td.appendChild(divEng);
+    }
     return td;
 }
 

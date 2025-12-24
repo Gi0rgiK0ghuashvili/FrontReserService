@@ -155,78 +155,6 @@
                 </div>
                 <!-- END Guest info -->
 
-                <!-- Inputs and Create order -->
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header bg-success text-white">
-                        <h6 class="mb-0">მენიუს მართვა</h6>
-                    </div>
-                    <div class="card-body">
-                        <form id="addItemForm" onsubmit="">
-                            <div class="row g-6">
-                                <!-- დარბაზის არჩევა -->
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label">დარბაზი</label>
-                                    <select name="guest-hall" id="guest-hall" class="form-select" onchange=""
-                                        required="">
-                                        <option value="">აირჩიე დარბაზი</option>
-                                        <option value="87" data-category-ka="Test" data-category-en="Test"> Test
-                                        </option>
-                                        <option value="19" data-category-ka="ალკოჰოლური სასმელები"
-                                            data-category-en="Beverages"> ალკოჰოლური სასმელები</option>
-                                        <option value="20" data-category-ka="გამაგრილებელი სასმელები"
-                                            data-category-en="Soft Drinks"> გამაგრილებელი სასმელები</option>
-                                    </select>
-
-                                </div>
-
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label">კატეგორია</label>
-                                    <select name="guest-category" id="guest-category" class="form-select" onchange=""
-                                        required="">
-                                        <option value="" selected>აირჩიე კატეგორია</option>
-                                        <option value="87" data-category-ka="Test" data-category-en="Test"> Test
-                                        </option>
-                                        <option value="19" data-category-ka="ალკოჰოლური სასმელები"
-                                            data-category-en="Beverages"> ალკოჰოლური სასმელები</option>
-                                        <option value="20" data-category-ka="გამაგრილებელი სასმელები"
-                                            data-category-en="Soft Drinks"> გამაგრილებელი სასმელები</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label">ნივთი</label>
-                                    <select name="guest-item" id="guest-item" class="form-select" onchange=""
-                                        required="">
-                                        <option value="">აირჩიე ნივთი</option>
-                                        <option value="20" data-category-ka="გამაგრილებელი სასმელები"
-                                            data-category-en="Soft Drinks">გამაგრილებელი სასმელები</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-lg-1 col-md-6">
-                                    <label class="form-label active">რაოდ.</label>
-                                    <input type="number" name="quantity" id="quantity" class="form-control" min="1"
-                                        value="1" required="">
-                                </div>
-                                <div class="col-lg-2 col-md-6">
-                                    <label class="form-label">ფასი</label>
-                                    <input type="text" name="price" id="price" class="form-control bg-light" required=""
-                                        readonly>
-                                </div>
-
-                                <div class="col-lg-12 col-md-6">
-                                    <label class="form-label"></label>
-                                    <button type="button" class="btn btn-success w-100" id="add-items-button"
-                                        title="დამატება შეკვეთაში">
-                                        <i class="bi bi-plus-circle me-1"></i>დამატება
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <!-- END Inputs and Create order -->
-
                 <!-- Tale Body -->
                 <div class="card">
                     <div class="card-header">
@@ -247,7 +175,7 @@
                                         <th class="category-header-excel"></th>
                                     </tr>
                                 </thead>
-                                <tbody id="add-modal-tableBody">
+                                <tbody id="tableBody">
                                     <tr>
                                         <td data-value="1" class="text-center fw-bold">1</td>
                                         <td data-value="Order-004" class="text-center">Order-004</td>
@@ -274,6 +202,102 @@
 
             </div>
         </div>
+
+        <!-- ანგარიშსწორება -->
+        <!-- <div class="row mt-4 no-print"> -->
+        <div class="p-4">
+
+            <div class="card">
+
+                <div class="card-body">
+                    <div class="col-lg-12">
+                        <div class="accordion" id="paymentAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="paymentHeading">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#paymentCollapse" aria-expanded="true"
+                                        aria-controls="paymentCollapse" style="padding: 12px 16px; font-size: 0.95rem;">
+                                        <i class="bi bi-credit-card me-2"></i>
+                                        <strong>ანგარიშსწორება</strong>
+                                        <span class="ms-auto me-3">
+                                            <strong class="text-primary" id="quick_total_display">200.00 ₾</strong>
+                                        </span>
+                                    </button>
+                                </h2>
+                                <div id="paymentCollapse" class="accordion-collapse collapse show"
+                                    aria-labelledby="paymentHeading" data-bs-parent="#paymentAccordion" style="">
+                                    <div class="accordion-body p-0">
+
+
+                                        <!-- Grand Total -->
+                                        <div class="p-2 border-bottom text-center"
+                                            style="background: linear-gradient(135deg, #e3f2fd, #f8f9fa);">
+                                            <small class="text-muted" id="total_label_text">ჯამი დღგ-ს
+                                                ჩათვლით</small><br>
+                                            <strong id="payment_summary_total" class="text-primary fs-5">
+                                                <span id="payment-total-base">200.00</span> ₾
+                                            </strong>
+                                        </div>
+
+                                        <!-- VAT Section -->
+                                        <div class="p-2 border-bottom">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <input type="checkbox" class="form-check-input me-2"
+                                                        id="vat_deduction_checkbox" onchange="applyVATDeduction()">
+                                                    <small><strong>დღგ-ს გამოკლება (18%)</strong></small>
+                                                </div>
+                                                <span id="vat_amount" class="text-danger small fw-bold">0.00 ₾</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between mt-1">
+                                                <small class="text-muted">წმინდა თანხა:</small>
+                                                <strong id="net_amount" class="text-info small">
+                                                    <span id="net-amount-base">200.00</span> ₾
+                                                </strong>
+                                            </div>
+                                        </div>
+
+                                        <!-- Payment Details -->
+                                        <div class="p-2">
+                                            <div class="row g-2">
+                                                <div class="col-6">
+                                                    <label class="form-label small mb-1 active">ავანსი</label>
+                                                    <input type="number" min="0" step="0.01" placeholder="0.00"
+                                                        class="form-control form-control-sm text-end"
+                                                        id="prepayment_input" oninput="calculateRemaining()">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label class="form-label small mb-1">ფორმატი</label>
+                                                    <select class="form-select form-select-sm" id="payment_format">
+                                                        <option value="PM">PM</option>
+                                                        <option value="On the spot" selected="">On the spot</option>
+                                                        <option value="Bank Transfer">Bank Transfer</option>
+                                                        <option value="Cash">Cash</option>
+                                                        <option value="Card">Card</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <!-- Remaining Amount -->
+                                            <div
+                                                class="d-flex justify-content-between align-items-center mt-2 p-2 bg-warning bg-opacity-10 rounded">
+                                                <small class="text-muted">დარჩენილი:</small>
+                                                <strong id="remaining_amount" class="text-danger">
+                                                    <span id="remaining-amount-base">200.00</span> ₾
+                                                </strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ანგარიშსწორების დასასრული -->
 
 
     </main><!-- End #main -->

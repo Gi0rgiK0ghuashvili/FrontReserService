@@ -5,7 +5,7 @@ const apiHost = "10.30.52.50";
 
 //const port = 5117; // შენი API პორტი
 //const port = 7079; // შენი API პორტი
-//const port = 80; // შენი API პორტი
+//const port = 80; // შენი API პორტი localhost web api
 const port = 8080; // შენი API პორტი
 
 const apiFullAddress = `http://${apiHost}:${port}/api`;
@@ -79,7 +79,6 @@ export async function getRequest(controller, endpoint, payload = null) {
         return result;
     }
     catch (error) {
-
         console.log("First ex: ", error);
 
         const ex = {

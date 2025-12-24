@@ -30,6 +30,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/custom-menu.css" rel="stylesheet">
 
   <script type="module" src="assets/js/behaviors/authGuard.js"></script>
 </head>
@@ -61,86 +62,126 @@
         </ol>
       </nav>
     </div><!-- End Page Title -->
-<!--მონაცემების დამატების სექცია - დასაწყისი-->
+    <!--მონაცემების დამატების სექცია - დასაწყისი-->
     <section class="section">
-      <div class="card p-3">
-        <form id="searchForm" class="row g-3">
-          <div class="col-md-4">
-            <label for="add-item-category-geo" class="form-label">კატეგორია ქართულად</label>
-            <input type="text" id="add-item-category-geo" class="form-control" placeholder="მაგ: კატეგორია">
-          </div>
-          <div class="col-md-4">
-            <label for="add-item-category-eng" class="form-label">კატეგორია ინგლისურად</label>
-            <input type="text" id="add-item-category-eng" class="form-control" placeholder="მაგ: category">
-          </div>
-          <div class="col-md-4">
-            <label for="add-item-name-geo" class="form-label">დასახელება ქართულად</label>
-            <input type="text" id="add-item-name-geo" class="form-control" placeholder="მაგ: დასახელება">
-          </div>
-          <div class="col-md-4">
-            <label for="add-item-name-eng" class="form-label">დასახელება ინგლისურად</label>
-            <input type="text" id="add-item-name-eng" class="form-control" placeholder="მაგ: name">
-          </div>
-          <div class="col-md-4">
-            <label for="add-item-price" class="form-label">ფასი</label>
-            <input type="text" id="add-item-price" class="form-control" placeholder="მაგ: 123456789">
-          </div>
-          <div class="text-center">
-            <button type="button" name="items" id="add-button" class="btn btn-primary">დამატება</button>
-          </div>
-        </form>
-      </div>
-    </section><!--მონაცემების დამატების სექცია - დასასრული-->
+      <div class="multi-select">
+        <input type="text" id="hallSearch" class="form-control" placeholder="აირჩიე დარბაზი..." readonly>
 
-    <section class="section">
-      <div class="card p-3">
-        <form id="searchForm" class="row g-3">
-          <div class="col-md-4">
-            <label for="productName" class="form-label">პროდუქტის სახელი</label>
-            <input type="text" id="productName" class="form-control" placeholder="მაგ: Laptop" value="laptop">
-          </div>
-          <div class="col-md-4">
-            <label for="minPrice" class="form-label">მინ. ფასი</label>
-            <input type="number" id="minPrice" class="form-control" placeholder="მაგ: 100" value="100">
-          </div>
-          <div class="col-md-4">
-            <label for="maxPrice" class="form-label">მაქს. ფასი</label>
-            <input type="number" id="maxPrice" class="form-control" placeholder="მაგ: 1000" value="6000">
-          </div>
-          <div class="col-12">
-            <button type="button" id="searchButton" class="btn btn-primary">ძებნა</button>
-          </div>
-        </form>
-      </div>
-    </section>
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
-
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">თანამშრომლები</h5>
-
-              <!-- Table with stripped rows -->
-              <table class="table ">
-                <thead>
-                  <tr>
-                    <th>სახელი</th>
-                    <th>სახელი ინგლისურად</th>
-                    <th>კატეგორია</th>
-                    <th>ფასი</th>
-                  </tr>
-                </thead>
-                <tbody id="menuTableBody">
-                </tbody>
-              </table>
-              <!-- End Table with stripped rows -->
-
-            </div>
-          </div>
+        <div class="dropdown-list" id="hallDropdown">
+          <!-- <label> <input type="checkbox" value="87"> Test </label>
+          <label> <input type="checkbox" value="19"> ალკოჰოლური სასმელები </label> 
+          <label> <input type="checkbox" value="20"> გამაგრილებელი სასმელები </label>
+          <label> <input type="checkbox" value="პანო123"> პანო123 </label>
+          <label> <input type="checkbox" value="პანო 6"> პანო 6 </label>
+          <label> <input type="checkbox" value="პანო 3"> პანო 3 </label> -->
         </div>
       </div>
-    </section>
+    </section> <!--მონაცემების დამატების სექცია - დასასრული-->
+
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-success text-white">
+        <h6 class="mb-0">მენიუს მართვა</h6>
+      </div>
+      <div class="card-body">
+        <form id="addItemForm" onsubmit="">
+          <div class="row g-6">
+            <!-- დარბაზის არჩევა -->
+
+            <div class="col-lg-3 col-md-6">
+              <label class="form-label">კატეგორია</label>
+              <select name="guest-category" id="guest-category" class="form-select" onchange="" required="">
+                <option value="" selected="">აირჩიე კატეგორია</option>
+                <!-- <option value="87" data-category-ka="Test" data-category-en="Test"> Test
+                </option>
+                <option value="19" data-category-ka="ალკოჰოლური სასმელები" data-category-en="Beverages"> ალკოჰოლური
+                  სასმელები</option>
+                <option value="20" data-category-ka="გამაგრილებელი სასმელები" data-category-en="Soft Drinks">
+                  გამაგრილებელი სასმელები</option>
+                <option value="სასმელები" data-category-geo="სასმელები" data-category-eng="Drinks"
+                  data-name-geo="დირბულა3" data-name-eng="Dirbula3" data-price="1234">სასმელები</option>
+                <option value="სასმელები" data-category-geo="სასმელები" data-category-eng="Drinks"
+                  data-name-geo="დირბულა2" data-name-eng="Dirbula2" data-price="150">სასმელები</option>
+                <option value="სასმელები" data-category-geo="სასმელები" data-category-eng="Drinks"
+                  data-name-geo="დირბულა" data-name-eng="Dirbula" data-price="150">სასმელები</option>
+                <option value="გამომცხვარი" data-category-geo="გამომცხვარი" data-category-eng="Coocked"
+                  data-name-geo="ნამცხვარი" data-name-eng="Pie" data-price="12">გამომცხვარი</option>
+                <option value="სასმელები" data-category-geo="სასმელები" data-category-eng="Drinks"
+                  data-name-geo="დირბულა3" data-name-eng="Dirbula3" data-price="150">სასმელები</option> -->
+              </select>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+              <label class="form-label">ნივთი</label>
+              <select name="guest-item" id="guest-item" class="form-select" onchange="" required="">
+                <option value="">აირჩიე ნივთი</option>
+                <option value="20" data-category-ka="გამაგრილებელი სასმელები" data-category-en="Soft Drinks">
+                  გამაგრილებელი სასმელები</option>
+              </select>
+            </div>
+
+            <div class="col-lg-2 col-md-6">
+              <label class="form-label active">რაოდ.</label>
+              <input type="number" name="quantity" id="quantity" class="form-control" min="1" value="1" required="">
+            </div>
+
+            <div class="col-lg-2 col-md-6">
+              <label class="form-label">ფასი</label>
+              <input type="text" name="price" id="price" class="form-control bg-light" required="" readonly="">
+            </div>
+
+            <div class="col-lg-12 col-md-6">
+              <label class="form-label"></label>
+              <button type="button" class="btn btn-success w-100" id="add-button" title="დამატება შეკვეთაში">
+                <i class="bi bi-plus-circle me-1"></i>დამატება
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <div class="card shadow-sm">
+      <div class="card-header bg-light">
+        <div class="card-header bg-light d-flex justify-content-between align-items-center">
+          <h6 class="mb-0 text-center" id="tableHeaderTitle">მენიუს სახელი</h5>
+          </div>
+      </div>
+      <div class="card-body p-0">
+        <table class="table table-bordered table-striped small mb-0">
+          <colgroup>
+            <col style="width: 40%;">
+            <col style="width: 30%;">
+            <col style="width: 15%;">
+            <col style="width: 15%;">
+          </colgroup>
+          <tbody id="subcategoryTableBody">
+            <tr>
+              <td colspan="4" class="table-secondary text-center fw-bold text-dark">
+                Test
+              </td>
+            </tr>
+            <tr>
+              <td>საფერავში გამომცხვარი ხბოს ხორცი წიწაკის ჯემით და გოგრით</td>
+              <td>Veal baked in Saperavi wine with chilli jam and pumpkin</td>
+              <td>1010</td>
+              <td class="text-center">
+                <a href="#" class="btn btn-sm btn-warning me-1 edit-subcategory-btn" data-id="449"
+                  data-subcategories="საფერავში გამომცხვარი ხბოს ხორცი წიწაკის ჯემით და გოგრით"
+                  data-subcategories-en="Veal baked in Saperavi wine with chilli jam and pumpkin" data-price="1010"
+                  title="რედაქტირება">
+                  <i class="bi bi-pencil"></i>
+                </a>
+                <a href="?delete_subcategory_id=449" class="btn btn-sm btn-danger" title="წაშლა"
+                  onclick="return confirm('დარწმუნებული ხართ?')">
+                  <i class="bi bi-trash"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
   </main><!-- End #main -->
 
@@ -164,8 +205,9 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
- 
+
   <script type="module" src="assets/js/menus/menu.js" defer></script>
+  <script type="module" src="assets/js/menus/menu-component-functions.js" defer></script>
 
 </body>
 
