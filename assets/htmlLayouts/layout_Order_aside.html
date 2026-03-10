@@ -1,0 +1,165 @@
+<aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="index.html">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="order-add.html">
+                <i class="bi bi-card-list"></i>
+                <span>შეკვეთის დამატება</span>
+            </a>
+        </li><!-- End Register Page Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="orders.html">
+                <i class="bi bi-card-list"></i>
+                <span>შეკვეთები</span>
+            </a>
+        </li><!-- End Register Page Nav -->
+        <li class="nav-item">
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-layout-text-window-reverse"></i><span>მონაცემები</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="tables-menu-add.html">
+                        <i class="bi bi-circle"></i><span>მენიუს მართვა</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="tables-orders.html">
+                        <i class="bi bi-circle"></i><span>შეკვეთების ისტორია</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="tables-employees.html">
+                        <i class="bi bi-circle"></i><span>თანამშრომლები</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="tables-categories.html">
+                        <i class="bi bi-circle"></i><span>კატეგორიები</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="tables-halls.html">
+                        <i class="bi bi-circle"></i><span>დარბაზები</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="tables-paymenttypes.html">
+                        <i class="bi bi-circle"></i><span>გადახდის ტიპები</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Tables Nav -->
+
+        <li class="nav-heading">Pages</li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-register.html">
+                <i class="bi bi-card-list"></i>
+                <span>რეგისტრაცია</span>
+            </a>
+        </li><!-- End Register Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-contact.html">
+                <i class="bi bi-envelope"></i>
+                <span>კონტაქტი</span>
+            </a>
+        </li><!-- End Contact Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed">
+                <i class="bi bi-box-arrow-in-right"></i>
+                <span type="button" id="logOut-navLink">LogOut</span>
+            </a>
+        </li><!-- End LogOut Page Nav -->
+
+    </ul>
+
+    <div class="accordion" id="paymentAccordion">
+        <h2 class="accordion-header" id="paymentHeading">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#paymentCollapse"
+                aria-expanded="true" aria-controls="paymentCollapse" style="padding: 12px 16px; font-size: 0.95rem;">
+                <i class="bi bi-credit-card me-2"></i>
+                <strong>ანგარიშსწორება</strong>
+                <span class="ms-auto me-3">
+                    <strong class="text-primary" id="quick_total_display">0.00 ₾</strong>
+                </span>
+            </button>
+        </h2>
+
+        <div id="paymentCollapse" class="accordion-collapse collapse show" aria-labelledby="paymentHeading"
+            data-bs-parent="#paymentAccordion">
+            <div class="accordion-body p-0">
+
+
+                <div class="p-2 border-bottom text-center"
+                    style="background: linear-gradient(135deg, #e3f2fd, #f8f9fa);">
+                    <small class="text-muted" id="total_label_text">დღგ-ს გარეშე</small><br>
+                    <strong id="payment_summary_total" class="text-primary fs-5">
+                        <span id="payment-total-base">0.00</span> ₾
+                    </strong>
+                </div>
+
+
+                <div class="p-2 border-bottom">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <input type="checkbox" class="form-check-input me-2" id="vat_deduction_checkbox"
+                                onchange="applyVATDeduction()">
+                            <small><strong>დღგ-ს გამოკლება (18%)</strong></small>
+                        </div>
+                        <span id="vat_amount" class="text-danger small fw-bold">0.00
+                            ₾</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-1">
+                        <small class="text-muted">წმინდა თანხა:</small>
+                        <strong id="net_amount" class="text-info small">
+                            <span id="net-amount-base">0.00</span> ₾
+                        </strong>
+                    </div>
+                </div>
+
+                <!-- Payment Details -->
+                <div class="p-2">
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <label class="form-label small mb-1 active">ავანსი</label>
+                            <input type="number" min="0" step="0.01" placeholder="0.00"
+                                class="form-control form-control-sm text-end" id="prepayment_input"
+                                oninput="calculateRemaining()">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label small mb-1">ფორმატი</label>
+                            <select class="form-select form-select-sm" id="payment_format">
+                                <option value="PM">PM</option>
+                                <option value="On the spot" selected="">On the spot</option>
+                                <option value="Bank Transfer">Bank Transfer</option>
+                                <option value="Cash">Cash</option>
+                                <option value="Card">Card</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Remaining Amount -->
+                    <div
+                        class="d-flex justify-content-between align-items-center mt-2 p-2 bg-warning bg-opacity-10 rounded">
+                        <small class="text-muted">დარჩენილი:</small>
+                        <strong id="remaining_amount" class="text-danger">
+                            <span id="remaining-amount-base">0.00</span> ₾
+                        </strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aside><!-- End Sidebar-->

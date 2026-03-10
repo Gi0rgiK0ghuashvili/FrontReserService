@@ -1,65 +1,4 @@
-import { checkTokenValidation, sendTest, getRequest, logException, setRequest } from "../Commons/requests.js";
-
-class item {
-    constructor() {
-        this.categoryGeo;
-        this.categoryEng;
-        this.nameGeo;
-        this.nameEng;
-        this.price;
-    }
-}
-
-
-const addButton = document.getElementById("add-button");
-
-addButton.addEventListener("click", async (e) => {
-    e.preventDefault();
-
-
-    console.log(addButton.name);
-    console.log("this is items datatabel.");
-
-
-    const itemData = new item();
-    itemData.categoryGeo = document.getElementById("add-item-category-geo").value.trim();
-    itemData.categoryEng = document.getElementById("add-item-category-eng").value.trim();
-    itemData.nameGeo = document.getElementById("add-item-name-geo").value.trim();
-    itemData.nameEng = document.getElementById("add-item-name-eng").value.trim();
-    itemData.price = document.getElementById("add-item-price").value.trim();
-
-
-    if (itemData.nameGeo === null) {
-        alert("სახელი ქართულად ცარიელია.");
-        return;
-    }
-    if (itemData.nameEng === null) {
-        alert("სახელი ინგლისურად ცარიელია.");
-        return;
-    }
-    if (itemData.categoryGeo === null) {
-        alert("კატეგორია ქართულად ცარიელია.");
-        return;
-    }
-    if (itemData.categoryEng === null) {
-        alert("კატეგორია ინგლისურად ცარიელია.");
-        return;
-    }
-    if (itemData.price === null) {
-        alert("ფასი ცარიელია.");
-        return;
-    }
-
-    const itemDataResult = await setRequest("items", "addItem", itemData);
-
-    if (!itemDataResult) {
-        console.error(itemDataResult);
-        return;
-    }
-
-    console.log("this is from adding item", itemDataResult);
-
-});
+import {getRequest, } from"../../core/requests.js"
 
 (async function() {
 
@@ -69,8 +8,6 @@ addButton.addEventListener("click", async (e) => {
 
     await renderItemsTableById(items.value, "tableBody");
 })();
-
-
 
 async function renderItemsTableById(categories, elementId) {
 
@@ -173,7 +110,6 @@ async function renderItemsTableById(categories, elementId) {
             
             tableBody.appendChild(tr);
         });
-        
     }
     catch (exception) {
         const ex = {
@@ -183,39 +119,5 @@ async function renderItemsTableById(categories, elementId) {
         };
 
         const logExc = await logException(ex);
-
     }
-}
-
-function showModal(event) {
-    const divModalShow = event.target;
-    const div = document.createElement("div");
-
-    console.log(divModalShow.getAttribute("data-id"));
-    //const row = document.querySelector();
-    const tbody = document.getElementById("tableBody");
-
-    const rows = tbody.querySelectorAll("tr");
-
-    const row = event.target.closest("tr");
-    const table = document.getElementById("templatesTable");
-
-    // ვიღებთ <th>-ებს და მათი name ატრიბუტებს
-    const headers = [...table.querySelectorAll("thead th")].map(th =>
-        th.getAttribute("name")
-    );
-
-    // ვიღებთ <td>-ებში შევსებულ მნიშვნელობებს
-    const values = [...row.querySelectorAll("td")].map(td =>
-        td.textContent.trim()
-    );
-
-    // ვაგებთ ობიექტს: { headerName: rowValue }
-    const result = {};
-    headers.forEach((header, i) => {
-        result[header] = values[i] ?? null;
-    });
-
-    return result;
-
 }

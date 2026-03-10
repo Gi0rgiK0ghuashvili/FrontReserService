@@ -1,4 +1,4 @@
-import { logIn, sendTest } from "../Commons/requests.js";
+import { logIn, sendTest } from "../core/requests.js";
 
 (function () {
   document.addEventListener("DOMContentLoaded", () => {

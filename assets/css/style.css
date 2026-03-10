@@ -25,6 +25,7 @@ h4,
 h5,
 h6 {
   font-family: "Nunito", sans-serif;
+  font-size: 18px;
 }
 
 /*--------------------------------------------------------------
@@ -190,18 +191,23 @@ h6 {
   border-color: #f8d7da;
 }
 
-.bg-warning-light {
-  background-color: #fff3cd;
+.card-header.bg-warning-light {
+  background-color: #f5b35c;
   border-color: #fff3cd;
 }
 
-.bg-info-light {
+.card-header.bg-warning {
+  background-color: #d3af0d;
+  border-color: #fff3cd;
+}
+
+.card-header.bg-info-light {
   background-color: #cff4fc;
   border-color: #cff4fc;
 }
 
-.bg-dark-light {
-  background-color: #d3d3d4;
+.card-header.bg-dark-light {
+  background-color: #54545c;
   border-color: #d3d3d4;
 }
 
@@ -217,8 +223,9 @@ h6 {
 .card-footer {
   border-color: #ebeef4;
   background-color: #fff;
-  color: #798eb3;
+  color: #000;
   padding: 15px;
+  font-size: 25px;
 }
 
 .card-title {
@@ -1316,3 +1323,19 @@ h6 {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.card.header-info .card-header {
+    background-color: var(--bs-info);
+    color: #000;
+}
+
+.card.header-warning .card-header {
+    background-color: var(--bs-warning);
+    color: #000;
+}
+
+.card.header-success .card-header {
+    background-color: var(--bs-success);
+    color: #fff;
+}
+

@@ -20,3 +20,17 @@
     padding: 4px;
     cursor: pointer;
 }
+
+.collapse-icon {
+  transition: transform 0.3s ease;
+}
+
+/* როცა დახურულია */
+.card-header.collapsed .collapse-icon {
+  transform: rotate(-90deg);
+}
+
+/* როცა გახსნილია */
+.card-header:not(.collapsed) .collapse-icon {
+  transform: rotate(0deg);
+}

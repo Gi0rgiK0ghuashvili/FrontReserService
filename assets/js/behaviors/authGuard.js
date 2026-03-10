@@ -1,8 +1,8 @@
-import { checkTokenValidation} from "../Commons/requests.js";
+import { checkTokenValidation} from "../../js/core/requests.js";
 
 const tokenName = "authToken";
 
-(async function () {
+(function () {
     try {
         const token = localStorage.getItem(tokenName);
         if(!token)
@@ -10,7 +10,7 @@ const tokenName = "authToken";
             window.location.href = "pages-login.html";
         }
         
-        const checked = await checkTokenValidation();
+        const checked = checkTokenValidation();
 
     }
     catch (ex) {
